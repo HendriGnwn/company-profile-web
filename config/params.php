@@ -6,6 +6,6 @@ return [
     'mobileUrl' => 'http://m.qelopak.com',
     'jsBlock' => 0,
     'modalBlock' => 0,
-    'activeFrontTheme' => 'v1',
+    'activeFrontTheme' => 'v2',
     'activeAdminTheme' => 'admin-lte',
 ];

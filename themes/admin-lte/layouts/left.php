@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
         <?= Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
-                'items' => $items,
+                'items' => $items
             ]
         ) ?>
 

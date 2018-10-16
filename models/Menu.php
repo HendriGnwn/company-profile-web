@@ -131,7 +131,7 @@ class Menu extends BaseActiveRecord
             if ($data->parents != null) {
                 $items[$data->id]['url'] = '#';
                 $items[$data->id]['options'] = $childOptions;
-                $items[$data->id]['items'] = $this->getMenuChildren($items[$data->id]['items'], $data->parents);
+                $items[$data->id]['items'] = $this->getMenuChildren($items[$data->id]['items'], $data->parents, $options, $childOptions);
             }
             
             if (!empty($data->option)) {

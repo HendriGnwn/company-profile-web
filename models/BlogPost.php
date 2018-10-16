@@ -378,6 +378,15 @@ class BlogPost extends BaseActiveRecord
 
         return Url::to('@' . $path, true);
     }
+    
+    public function getPhotoImg($options = ['class' => 'img-responsive'])
+    {
+        if (!$this->getPhotoUrl()) {
+            return Html::img('https://via.placeholder.com/850x550', $options);
+        }
+        
+        return Html::img($this->getPhotoUrl(), $options + ['alt' => $this->name]);
+    }
 
     public function getPhotoUrlHtml($name = null, $options = ['target' => '_blank']) 
     {

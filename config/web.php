@@ -12,7 +12,7 @@ $config = [
     
     // default language to use for i18n purpose
     // source translation is located in @app/messages directory
-    //'language' => 'id-ID',
+    'language' => 'id-ID',
     
     //'catchAll' => ['site/maintenance'],
 	
@@ -66,8 +66,9 @@ $config = [
 			'theme' => [
 				'pathMap' => [
                     '@app/views' => '@app/themes/'.$activeFrontTheme.'/views',
+                    '@app/widgets' => '@app/themes/'.$activeFrontTheme.'/widgets',
 					/** for administrator module */
-				   '@app/modules/administrator/views' => '@app/themes/'.$activeAdminTheme,
+                    '@app/modules/administrator/views' => '@app/themes/'.$activeAdminTheme,
 				],
 			],
 		],
