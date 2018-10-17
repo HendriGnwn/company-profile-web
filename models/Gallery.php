@@ -173,10 +173,15 @@ class Gallery extends BaseActiveRecord
         $path = $this->path . $this->photo;
 
         if (!file_exists(Yii::getAlias('@app/' . $path))) {
-            return null;
+            return 'https://via.placeholder.com/550x550';
         }
 
         return Url::to('@' . $path, true);
+    }
+    
+    public function getPhotoImg($options = ['class' => 'img-responsive'])
+    {
+        return Html::img($this->getPhotoUrl(), $options);
     }
 
     public function getPhotoUrlHtml($name = null, $options = ['target' => '_blank']) 

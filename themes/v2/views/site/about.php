@@ -39,6 +39,28 @@ $this->registerMetaSocialMedia($socialMedia);
 
 ?>
 
+<div class="section_heading">
+    <h2><?= Yii::t('app', 'Works') ?></h2>
+    <p><?= Yii::t('app', 'There are many versions of our portfolio online, where the visitor can follow the links to the details. We provide an overview and explanation of the each portfolios.') ?> </p>
+</div>
+<div class="text_wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+					<div class="text_wrapper_content">
+						<h3>Website Builder Kit</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut tempus orci, in dignissim erat. Mauris at ullamcorper dolor. Integer hendrerit lectus ut lectus consectetur, a semper enim facilisis. Duis velit erat, viverra pharetra quam efficitur, pellentesque hendrerit nunc. Ut vitae aliquam tellus. Ut lacinia leo et dui ornare interdum. Etiam viverra placerat mi nec suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras accumsan eget eros volutpat ullamcorper. Duis eget risus pulvinar, consectetur nisi id, mollis massa. Nulla porta ut risus vel interdum. Nunc sit amet mollis magna. Phasellus facilisis odio nec eros dapibus mollis.</p>
+						<p>Nullam ac magna vitae ex ultrices ornare quis ac est. Nam ex ante, aliquet non mollis id, convallis vitae ex. Cras consequat, lectus nec rutrum dictum, purus ligula ultrices massa, nec eleifend dui dolor at turpis. Proin sit amet sollicitudin nunc, ut pharetra sem. Praesent dictum ullamcorper auctor. Phasellus vitae dui scelerisque, finibus nibh et, lacinia orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi lobortis dolor mi, eget vehicula magna egestas a. Aliquam aliquet lobortis elit, vitae sodales est hendrerit eget. Suspendisse erat neque, posuere id ipsum nec, consequat sagittis ipsum. Pellentesque metus sapien, finibus et scelerisque in, porttitor non urna.</p>
+						<p>Nullam ornare, dolor sed imperdiet facilisis, metus turpis porta metus, non placerat nulla eros non quam. Maecenas rutrum ante est, non imperdiet tortor accumsan ut. Aliquam gravida purus elit, tempor tristique elit lobortis eu. Aenean in gravida ipsum. Nullam non nunc non nibh laoreet semper. Praesent nec molestie ante, eget commodo felis. Praesent mattis posuere mattis. Aenean ornare augue massa, vel auctor lectus tristique vel. Sed efficitur sapien ac mauris lacinia aliquet sed sed tellus. Suspendisse dictum, augue eget aliquam interdum, magna massa elementum turpis, vel pulvinar mi lorem quis nisi.</p>
+						<p>Maecenas in mauris at diam eleifend fringilla. Sed viverra tellus ac varius molestie. Nunc ut nulla a risus elementum luctus vel id tellus. Morbi porttitor mi ut pellentesque aliquam. Cras gravida et neque sit amet luctus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam in sapien laoreet, pharetra neque a, aliquet eros. Sed nec nibh nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut felis erat, sodales eu venenatis sit amet, luctus non felis. Nullam elementum elementum dolor, vel aliquam metus rutrum sed.</p>
+						<p>Vivamus mattis enim eros, ac tempus orci congue in. Nunc tincidunt mattis blandit. Sed ornare finibus nulla, vitae sagittis nisl viverra nec. Phasellus in eros a lectus viverra sollicitudin. Donec dapibus eros erat, vel consectetur libero sollicitudin nec. Aliquam erat volutpat. Nam vitae sagittis ipsum. Proin elementum sapien augue. Ut vel sodales tortor, ac scelerisque nulla. Nam massa velit, pulvinar a dapibus at, tincidunt at libero.</p>
+						<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <?= $model->description ?>
 
 <?= TeamWidget::widget() ?>

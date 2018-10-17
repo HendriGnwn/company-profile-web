@@ -48,7 +48,7 @@ use yii\helpers\Html;
 
                                 <div class="entry-content">
                                     <p><?= $post->lead_text ?></p>
-                                    <a class="readmore_btn" href="#"> More</a>
+                                    <?= Html::a('More', $post->getDetailUrl(), ['class' => 'readmore_btn']) ?>
                                 </div>
                                 <!-- /.entry-content -->
 

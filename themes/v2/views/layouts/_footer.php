@@ -21,7 +21,7 @@ use yii\widgets\Menu;
                             <p>Proin gravida nibh vel velit auctr aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit aks consequat vel velit auctor....</p>
                         </div>
                         <div class="aboutus_link">
-                            <a href="#">Read More<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            <a href="<?= Url::to('about-us') ?>">Read More<i class="fa fa-caret-right" aria-hidden="true"></i></a>
                         </div>
                         <?= Menu::widget([
                             'options' => ['class' => 'aboutus_social_icons'],
@@ -71,24 +71,20 @@ use yii\widgets\Menu;
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">
                     <div class="wrapper_second_blog">
                         <h4>From the Blog</h4>
+                        <?php
+                        $blogs = app\models\BlogPost::getSearch(['result' => 'result', 'limit' => 2]);
+                        foreach ($blogs as $blog) :
+                        ?>
                         <div class="blog_wrapper1">
                             <div class="blog_image">
-                                <img src="themes/v2/images/home/home-2/blog-img1.png" class="img-responsive" alt="blog-img1_img" />
+                                <?= $blog->getPhotoImg() ?>
                             </div>
                             <div class="blog_text">
-                                <h5><a href="#">Last Booking Registration Date</a></h5>
-                                <div class="blog_date"><i class="fa fa-calendar-o" aria-hidden="true"></i>June 28, 2018-19</div>
+                                <h5><?= Html::a($blog->title, $blog->getDetailUrl()) ?></h5>
+                                <div class="blog_date"><i class="fa fa-calendar-o" aria-hidden="true"></i><?= app\helpers\FormatConverter::dateFormat($blog->post_date, 'd M Y') ?></div>
                             </div>
                         </div>
-                        <div class="blog_wrapper2">
-                            <div class="blog_image">
-                                <img src="themes/v2/images/home/home-2/blog-img2.png" class="img-responsive" alt="blog-img2_img" />
-                            </div>
-                            <div class="blog_text">
-                                <h5><a href="#">Learn Every Thing you Want</a></h5>
-                                <div class="blog_date"><i class="fa fa-calendar-o" aria-hidden="true"></i>June 28, 2018-19</div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">

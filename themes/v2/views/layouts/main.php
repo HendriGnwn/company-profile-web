@@ -30,19 +30,25 @@ Yii::$app->name = Yii::$app->name . ' | '. Config::getAppMotto();
     <?= $this->render('_header') ?>
     
     <!--page title start-->
-    <section class="page-title page-title-center cover-3 padding-top-220 padding-bottom-120 overlay purple-5 fixed-bg">
+    <div class="page_header">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h2 class="white-text font-40 text-bold"><?= $this->title ?></h2>
-                    <?= Breadcrumbs::widget([
-                        'tag' => 'ol',
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                    ]) ?>
+                <div class="col-lg-8 col-md-8 col-xs-12 col-sm-6">
+                    <h1><?= $this->title ?></h1>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                    <div class="sub_title_section">
+                        <?= Breadcrumbs::widget([
+                            'tag' => 'ul',
+                            'options' => ['class' => 'sub_title'],
+                            'itemTemplate' => '<li>{link} <i class="fa fa-angle-right" aria-hidden="true"></i></li>',
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        ]) ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     <!--page title end-->
     
     <?= $this->render('_content', ['content' => $content]) ?>

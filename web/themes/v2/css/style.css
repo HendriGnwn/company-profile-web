@@ -1547,3 +1547,18 @@ ul{
 }
 
 /* media query css for mobile end */
+
+/* contact_info_section start */
+
+.contact_info_section{
+	float:left;
+	width:100%;
+	padding-top:100px;
+	padding-bottom:100px;
+}
+#map{
+	float:left; 
+	width:100%; 
+	height:500px;
+}
+/* contact_info_section end */

@@ -11,18 +11,25 @@ use yii\helpers\Url;
  */
 
 /* @var $model Portfolio */
-
-if (!$model->getIsGallery()) :
+if ($model->getIsGallery()) :
     $photoUrl = $model->getFirstGallery()->getPhotoUrl();
     $photoName = $model->getFirstGallery()->name;
+    $photoImg = $model->getFirstGallery()->getPhotoImg([
+        'title' => $photoName, 
+        'class' => 'img-responsive'
+    ]);
 else:
-    $photoUrl = Url::to(['data/img/portfolio-dummy-1.jpg']);
+    $photoUrl = 'https://via.placeholder.com/550x550';
     $photoName = 'Portfolio';
+    $photoImg = Html::img($photoUrl, [
+        'title' => $photoName, 
+        'class' => 'img-responsive'
+    ]);
 endif;
 ?>
 <div class="portfolio_img_wrapper">
     <div class="portfolio_img">
-        <?= Html::img($photoUrl, ['title' => $photoName, 'class' => 'img-responsive']) ?>
+        <?= $photoImg ?>
         <div class="portfolio_img_overlay">
             <div class="portfolio_img_text">
                 <?= Html::a("<i class='fa fa-plus' aria-hidden='true'></i>", $photoUrl, ['class' => 'search', 'alt' => $photoName]) ?>

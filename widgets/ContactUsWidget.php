@@ -18,11 +18,13 @@ use yii\base\Widget;
 class ContactUsWidget extends Widget
 {
     public $model;
+    public $sectionClass;
     
     public function run()
     {
         return $this->render('contact-us', [
             'model' => $this->model,
+            'sectionClass' => $this->sectionClass
         ]);
     }
 }

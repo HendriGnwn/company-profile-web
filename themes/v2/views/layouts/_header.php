@@ -98,7 +98,8 @@ use app\models\Config;
             <div class="container">
                 <div class="navbar-header hidden-xs hidden-sm">
                     <?= Html::a(
-                        Html::img(['data/img/logo.png'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark']),
+                        //Html::img('https://via.placeholder.com/150x35/4285f4/555555?text=LOGO 150x25', ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark']),
+                        Html::img(['data/img/logo.jpg'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark', 'width' => 50]),
                         ['/site/index'], 
                         [
                             'class' =>'navbar-brand',

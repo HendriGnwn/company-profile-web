@@ -33,84 +33,69 @@ $socialMedia = [
 $this->registerMetaSocialMedia($socialMedia);
 
 ?>
-        <?= BannerWidget::widget() ?>
+    <?= BannerWidget::widget() ?>
 
-        <?= ShortServiceWidget::widget() ?>
+    <?= ShortServiceWidget::widget() ?>
 
-        <?php 
-        $projectCompleted = Config::getCounterProjectCompleted(); 
-        $happyCustomer = Config::getCounterHappyCustomer();
-        $ourEmployee = Config::getCounterOurEmployee();
-        $yearOfExperience = Config::getCounterYearOfExperience();
-        ?>
+    <?php 
+    $projectCompleted = Config::getCounterProjectCompleted(); 
+    $happyCustomer = Config::getCounterHappyCustomer();
+    $ourEmployee = Config::getCounterOurEmployee();
+    $yearOfExperience = Config::getCounterYearOfExperience();
+    ?>
 
-        <div class="counterFour ptb-100">
-            <div class="container text-center">
-                <div class="row">
+    <div class="counterFour ptb-100">
+        <div class="container text-center">
+            <div class="row">
 
-                    <div class="col-xs-12 col-md-3 col-sm-3">
-                        <span class="icon-one"><i class="fa fa-check"></i></span>
-                        <h4><a href="#"><?= $projectCompleted->label ?></a></h4>
-                        <div class="count-description">
-                            <span class="timer"><?= $projectCompleted->value ?></span>
-                        </div>
+                <div class="col-xs-12 col-md-3 col-sm-3">
+                    <span class="icon-one"><i class="fa fa-check"></i></span>
+                    <h4><a href="#"><?= $projectCompleted->label ?></a></h4>
+                    <div class="count-description">
+                        <span class="timer"><?= $projectCompleted->value ?></span>
                     </div>
-
-
-                    <div class="col-xs-12 col-md-3 col-sm-3">
-                        <span class="icon-two"><i class="fa fa-calendar"></i></span>
-                        <h4><a href="#"><?= $yearOfExperience->label ?></a></h4>
-                        <div class="count-description">
-                            <span class="timer"><?= $yearOfExperience->value ?></span>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-12 col-md-3 col-sm-3">
-                        <span class="icon-three"><i class="fa fa-heart"></i></span>
-                        <h4><a href="#"><?= $happyCustomer->label ?></a></h4>
-                        <div class="count-description">
-                            <span class="timer"><?= $happyCustomer->value ?></span>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-12 col-md-3 col-sm-3">
-                        <span class="icon-four"><i class="fa fa-users"></i></span>
-                        <h4><a href="#"><?= $ourEmployee->label ?></a></h4>
-                        <div class="count-description">
-                            <span class="timer"><?= $ourEmployee->value ?></span>
-                        </div>
-                    </div>
-
-
                 </div>
-                <!-- /.row -->
+
+
+                <div class="col-xs-12 col-md-3 col-sm-3">
+                    <span class="icon-two"><i class="fa fa-calendar"></i></span>
+                    <h4><a href="#"><?= $yearOfExperience->label ?></a></h4>
+                    <div class="count-description">
+                        <span class="timer"><?= $yearOfExperience->value ?></span>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-md-3 col-sm-3">
+                    <span class="icon-three"><i class="fa fa-heart"></i></span>
+                    <h4><a href="#"><?= $happyCustomer->label ?></a></h4>
+                    <div class="count-description">
+                        <span class="timer"><?= $happyCustomer->value ?></span>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-md-3 col-sm-3">
+                    <span class="icon-four"><i class="fa fa-users"></i></span>
+                    <h4><a href="#"><?= $ourEmployee->label ?></a></h4>
+                    <div class="count-description">
+                        <span class="timer"><?= $ourEmployee->value ?></span>
+                    </div>
+                </div>
+
+
             </div>
-            <!-- /.container -->
+            <!-- /.row -->
         </div>
+        <!-- /.container -->
+    </div>
 
-        <?= PortfolioWidget::widget(['portfolios' => $portfolioProvider]) ?>
+    <?= PortfolioWidget::widget(['portfolios' => $portfolioProvider]) ?>
 
-        <?= TestimonialWidget::widget() ?>
+    <?= TestimonialWidget::widget() ?>
 
-        <?= BlogSectionWidget::widget() ?>
+    <?= BlogSectionWidget::widget() ?>
 
-        <?= SubscribeFormWidget::widget(['model' => $subscribeForm]) ?>
+    <?= ContactUsWidget::widget(['model' => $contactModel, 'sectionClass' => 'counterFour']) ?>
 
-        <?= ContactUsWidget::widget(['model' => $contactModel]) ?>
-        
-        <?= GoogleMapWidget::widget() ?>
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "url": "http://www.atc.co.id",
-  "contactPoint": [{
-    "@type": "ContactPoint",
-    "telephone": "<?= Config::getAppContactPhone() ?>",
-    "contactType": "customer service"
-  }]
-}
-</script>
+    <?= GoogleMapWidget::widget() ?>

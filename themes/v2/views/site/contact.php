@@ -30,6 +30,6 @@ $this->registerMetaSocialMedia($socialMedia);
 
 ?>
 
-<?= ContactUsWidget::widget(['model' => $model]) ?>
+<?= ContactUsWidget::widget(['model' => $model, 'sectionClass' => '']) ?>
 
 <?= app\widgets\GoogleMapWidget::widget() ?>
