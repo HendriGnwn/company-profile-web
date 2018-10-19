@@ -5,14 +5,22 @@ use kop\y2sp\ScrollPager;
 use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 
+$this->registerCssFile('themes/v2/css/portfolio_masonry_style_1.css');
+
 /* @var $portfolios ActiveDataProvider */
 
 ?>
 
 <div class="port_menu_wrapper">
-    <div class="section_heading">
-        <h2><?= Yii::t('app', 'Works') ?></h2>
-        <p><?= Yii::t('app', 'There are many versions of our portfolio online, where the visitor can follow the links to the details. We provide an overview and explanation of the each portfolios.') ?> </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 col-lg-offset-2">
+                <div class="section_heading">
+                    <h2><?= Yii::t('app', 'Works') ?></h2>
+                    <span class="bordered-icon"><i class="fa fa-square"></i></span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="portfolio-area">
         <div class="container">

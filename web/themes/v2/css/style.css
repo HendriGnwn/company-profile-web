@@ -237,7 +237,7 @@ ul{
 .signin_wrapper .dropdown-menu .signin_dropdown{
 	float:left;
     width: 350px;
-	padding:30px 50px;
+	padding:30px 30px;
 }
 .signin_wrapper .signin_dropdown a.btn {
     color: #fff;
@@ -1562,3 +1562,15 @@ ul{
 	height:500px;
 }
 /* contact_info_section end */
+.float-left {
+    float:left !important;
+}
+.p-t-10 {
+    padding-top: 100px; 
+}
+.about_section{
+	float:left;
+	width:100%;
+	padding-top:100px;
+	padding-bottom:100px;
+}

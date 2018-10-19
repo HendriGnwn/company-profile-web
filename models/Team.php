@@ -222,7 +222,7 @@ class Team extends BaseActiveRecord
         $path = $this->path . $this->photo;
 
         if (!file_exists(Yii::getAlias('@app/' . $path))) {
-            return null;
+            return 'https://via.placeholder.com/350x350/ffffff';
         }
 
         return Url::to('@' . $path, true);

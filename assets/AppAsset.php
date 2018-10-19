@@ -92,6 +92,7 @@ class AppAsset extends AssetBundle
             'themes/'.$this->theme.'/css/magnific-popup.css',
             'themes/'.$this->theme.'/css/homepage_style_2.css',
             'themes/'.$this->theme.'/css/style.css',
+            'themes/'.$this->theme.'/css/team_style_3.css',
             'themes/'.$this->theme.'/css/custom.css',
         ];
         

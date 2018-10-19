@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 ?>
 
-<div class="comments_form_section <?= $sectionClass ?>">
+<div id="contact" class="comments_form_section <?= $sectionClass ?>">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 col-lg-offset-2">
@@ -20,7 +20,7 @@ use yii\helpers\Html;
             </div>
             <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                 <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')) { ?>
-                    <div class="alert fade_info .fade">
+                    <div class="alert fade_success">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                         <strong><?= Yii::t('app', 'Success Message: Your message has been sent') ?></strong>
                     </div>

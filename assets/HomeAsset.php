@@ -91,7 +91,6 @@ class HomeAsset extends AssetBundle
             'themes/'.$this->theme.'/css/owl.carousel.css',
             'themes/'.$this->theme.'/css/magnific-popup.css',
             'themes/'.$this->theme.'/css/homepage_style_2.css',
-            'themes/'.$this->theme.'/css/portfolio_masonry_style_1.css',
             'themes/'.$this->theme.'/css/custom.css',
         ];
         

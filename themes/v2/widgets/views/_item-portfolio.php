@@ -38,3 +38,8 @@ endif;
         </div>
     </div>
 </div>
+<!--<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">-->
+<!--    <div class="vimeo_player">
+        <iframe src="http://techslides.com/demos/sample-videos/small.mp4" height="342" style="width:100%;" allowfullscreen=""></iframe>
+    </div>-->
+<!--</div>-->

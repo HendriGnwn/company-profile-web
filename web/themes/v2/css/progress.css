@@ -1,0 +1,56 @@
+/*progressFour start*/
+.progressFour {
+    float:left;
+    width:100%;
+	background: #f7f7f7;
+}
+.progressFour .progress-wrapper {
+	margin-bottom: 30px;
+}
+.progressFour .progress-item {
+	position: relative;
+	line-height: 26px;
+}
+
+.progressFour .progress-title {
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 40px;
+  	padding-bottom: 8px;
+  	position: absolute;
+  	color: #fff;
+  
+}
+
+.progressFour .progress-title i{
+	font-size: 15px;
+	line-height: 24px;
+	padding: 0 20px;
+	-ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); 
+    transform: rotate(0deg);
+}
+
+.progressFour .progress {
+	height: 39px;
+	background-color: #fff;
+	box-shadow: none;
+	border-radius: 0px;
+}
+
+.progressFour .progress-bar {
+	background-color: #4285f4;
+	box-shadow: none;
+	text-align: right;
+}
+
+.progressFour .progress-percent {
+	position: absolute;
+	font-size: 13px;
+	line-height: 40px;
+	color: #999999;
+	text-align: center;
+	right: 15px;
+}
+/*progressFour end*/

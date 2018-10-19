@@ -265,7 +265,7 @@ ul{
 .signin_wrapper .dropdown-menu .signin_dropdown{
 	float:left;
     width: 350px;
-	padding:30px 50px;
+	padding:30px 30px;
 }
 .signin_wrapper .signin_dropdown a.btn {
     color: #fff;
@@ -1593,7 +1593,7 @@ ul{
 }
 #filter li a:hover,
 #filter li a.active{
-	color: #4285f4;
+	color: #fff;
     border-color: #4285f4;
 }
 #filter li a:last-child{
@@ -2397,7 +2397,6 @@ blog_section start
 .blog_section .blog-post-wrapper {
 	background-color: #f7f7f7;
 	margin-bottom: 40px;
-	min-height: 550px;
 }
 .blog_section .blog-post-wrapper .post-thumbnail{
 	position: relative;

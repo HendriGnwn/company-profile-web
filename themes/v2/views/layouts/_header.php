@@ -55,6 +55,12 @@ use app\models\Config;
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="signin_dropdown">
+                                        <div class="sign_up_message">
+                                            <div class="section_heading">
+                                                <h3><?= Yii::t('app', 'Login for Membership') ?></h3><br/>
+                                                <span class="bordered-icon"><i class="fa fa-square"></i></span>
+                                            </div>
+                                        </div>
                                         <div class="formsix-pos">
                                             <div class="form-group i-email">
                                                 <input type="email" class="form-control" required="" id="emailTen" placeholder="Email Address *">
