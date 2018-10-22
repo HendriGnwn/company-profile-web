@@ -47,6 +47,32 @@ class Member extends BaseActiveRecord implements IdentityInterface
     const PREFIX_MEMBER_CITY = 3;
     const PREFIX_MEMBER_GENERAL = 4;
     
+    const STATUS_WAITING_APPROVAL = 5;
+    
+    /**
+     * @var UploadedFile
+     */
+    public $idCardPhotoFile;
+    
+    /**
+     * @var UploadedFile
+     */
+    public $photoFile;
+    
+    private $_path;
+    
+    public function init()
+    {
+        parent::init();
+        
+        $this->path = 'web/uploads/member/';
+        if (!is_dir(Yii::getAlias('@app/' . $this->path))) {
+            mkdir(Yii::getAlias('@app/' . $this->path));
+        }
+
+        return true;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -61,9 +87,9 @@ class Member extends BaseActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'email', 'password', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code', 'status'], 'required'],
+            [['first_name', 'email', 'password', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required'],
             [['postal_code', 'branch_id', 'status', 'confirmed_by', 'created_by', 'updated_by'], 'integer'],
-            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id'], 'safe'],
+            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status'], 'safe'],
             [['member_code', 'first_name', 'last_name', 'id_card_photo', 'photo'], 'string', 'max' => 100],
             [['email', 'password', 'address', 'blocked_reason'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
@@ -71,10 +97,17 @@ class Member extends BaseActiveRecord implements IdentityInterface
             [['province_id'], 'string', 'max' => 2],
             [['regency_id'], 'string', 'max' => 4],
             [['district_id'], 'string', 'max' => 7],
+            [['status'], 'default', 'value' => self::STATUS_WAITING_APPROVAL],
             [['province_id'], 'exist', 'skipOnError' => true, 'targetClass' => Provinces::className(), 'targetAttribute' => ['province_id' => 'id']],
             [['regency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Regencies::className(), 'targetAttribute' => ['regency_id' => 'id']],
             [['district_id'], 'exist', 'skipOnError' => true, 'targetClass' => Districts::className(), 'targetAttribute' => ['district_id' => 'id']],
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
+            [['photoFile', 'idCardPhotoFile'], 'file', 'skipOnEmpty' => false, 'checkExtensionByMimeType' => true,
+                'extensions' => ['jpg', 'jpeg', 'png'],
+                'maxSize' => 1024 * 1024 * 1, 'on' => self::SCENARIO_INSERT],
+            [['photoFile', 'idCardPhotoFile'], 'file', 'skipOnEmpty' => true, 'checkExtensionByMimeType' => true,
+                'extensions' => ['jpg', 'jpeg', 'png'],
+                'maxSize' => 1024 * 1024 * 1, 'on' => self::SCENARIO_UPDATE],
         ];
     }
 
@@ -236,5 +269,23 @@ class Member extends BaseActiveRecord implements IdentityInterface
         $number = str_pad($increment, $padLength, '0', STR_PAD_LEFT);
 
         return $left . $separator . $number;
+    }
+    
+    /**
+     * set path
+     * 
+     * @param type $value
+     */
+    public function setPath($value)
+    {
+        $this->_path = $value;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->_path;
     }
 }

@@ -81,12 +81,12 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                         </div>
                         <div class="formsix-pos">
                             <label for="Member_id_card_photo"><?= $model->getAttributeLabel('id_card_photo') ?></label>
-                            <?= $form->field($model, 'id_card_photo')
+                            <?= $form->field($model, 'idCardPhotoFile')
                                 ->fileInput(['maxlength' => true]) ?>
                         </div>
                         <div class="formsix-pos">
                             <label for="Member_id_card_photo"><?= $model->getAttributeLabel('photo') ?></label>
-                            <?= $form->field($model, 'photo')
+                            <?= $form->field($model, 'photoFile')
                                 ->fileInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('photo')]) ?>
                         </div>
                         <div class="formsix-pos">
