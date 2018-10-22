@@ -51,7 +51,7 @@ class MemberLoginForm extends Model
                 $this->addError($attribute, 'Incorrect username or password.');
             }
             
-            if (!$user || !$user->isActive()) {
+            if (!$user || $user->isInActive()) {
                 $this->addError($attribute, 'Your account has been blocked');
             }
         }

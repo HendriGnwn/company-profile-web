@@ -45,7 +45,8 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
     <div class="login_form_wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-1">
+                    
                     <?php
                     $form = ActiveForm::begin([
                         'action' => ['/member/signup'],
@@ -60,9 +61,25 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                             'errorOptions' => ['style' => 'margin-top: 0px; position:absolute !important;color:#fff !important;font-weight:normal !important;', 'class' => 'help-block help-block-error label label-danger'],
                         ]
                     ]);
+                    
                     ?>
                     <!-- login_wrapper -->
                     <div class="login_wrapper">
+                        <?php if (Yii::$app->session->hasFlash('success')) { ?>
+                            <div class="alert fade_success">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <strong><?= Yii::t('app', 'Success Message') ?>: <?= Yii::$app->session->getFlash('success') ?></strong>
+                            </div>
+                        <?php } ?>
+                        <?php if (Yii::$app->session->hasFlash('error')) { ?>
+                            <div class="alert fade_error">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <strong><?= Yii::t('app', 'Error Message') ?>: <?= Yii::$app->session->getFlash('error') ?></strong>
+                            </div>
+                        <?php } ?>
+                        
+                        <?= $form->errorSummary($model, ['class' => 'alert alert_error', 'style'=>'text-transform: inherit']) ?>
+                        
                         <div class="formsix-pos">
                             <?= $form->field($model, 'first_name')
                                 ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('first_name')]) ?>
@@ -109,7 +126,7 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                                 'pluginOptions'=>[
                                     'depends'=>['member-province_id'],
                                     'placeholder'=>$model->getAttributeLabel('regency_id'),
-                                    'url'=>Url::to(['/ajax/find-regency'])
+                                    'url'=>Url::to(['/ajax/find-regency', ['selected' => $model->regency_id]])
                                 ]
                             ]) ?>
                         </div>
@@ -122,7 +139,7 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                                 'pluginOptions'=>[
                                     'depends'=>['member-regency_id'],
                                     'placeholder'=>$model->getAttributeLabel('district_id'),
-                                    'url'=>Url::to(['/ajax/find-district'])
+                                    'url'=>Url::to(['/ajax/find-district', ['selected' => $model->district_id]])
                                 ]
                             ]) ?>
                         </div>
@@ -156,3 +173,8 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
     </div>
     <!-- /.login_form_wrapper-->
 </div>
+
+<?php
+$this->registerJs("
+    $('#member-province_id').trigger('change');
+");

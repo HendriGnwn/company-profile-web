@@ -5,9 +5,9 @@ namespace app\controllers;
 use app\models\Member;
 use app\models\MemberLoginForm;
 use Yii;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use const YII_ENV_TEST;
 
 class MemberController extends Controller
@@ -74,7 +74,17 @@ class MemberController extends Controller
         }
         
         $model = new Member();
+        $model->status = Member::STATUS_WAITING_APPROVAL;
         
+        if ($model->load(Yii::$app->request->post())) {
+            $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+            $model->idCardPhotoFile = UploadedFile::getInstance($model, 'idCardPhotoFile');
+            
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Anda berhasil daftar, silahkan cek email notifikasi dan Anda dapat login');
+                return $this->redirect(['signup']);
+            }
+        }
         
         return $this->render('signup', compact('model'));
     }

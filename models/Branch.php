@@ -29,6 +29,8 @@ use Yii;
  */
 class Branch extends \app\models\BaseActiveRecord
 {
+    const DEFAULT_BRANCH_ID = 1;
+    
     /**
      * @inheritdoc
      */

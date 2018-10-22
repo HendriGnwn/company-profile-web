@@ -105,7 +105,7 @@ Author: 	webstrot
     padding: 15px 20px;
     font-size: 14px;
     line-height: 24px;
-    border: 1px solid #fafafa;
+    border: 1px solid #f1f1f1;
     border-radius: 3px;
     box-shadow: none;
     font-family: 'Roboto';
@@ -113,7 +113,7 @@ Author: 	webstrot
    -moz-transition: all 0.3s ease 0s;
    -o-transition: all 0.3s ease 0s;
    transition: all 0.3s ease 0s;
-   background-color: #fafafa;
+   background-color: #f1f1f1;
 }
 .login_wrapper textarea.form-control{
 	height:auto;

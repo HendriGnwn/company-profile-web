@@ -3,8 +3,11 @@
 namespace app\models;
 
 use Yii;
+use yii\base\NotSupportedException;
 use yii\db\ActiveQuery;
+use yii\helpers\Inflector;
 use yii\web\IdentityInterface;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%member}}".
@@ -90,6 +93,7 @@ class Member extends BaseActiveRecord implements IdentityInterface
             [['first_name', 'email', 'password', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required'],
             [['postal_code', 'branch_id', 'status', 'confirmed_by', 'created_by', 'updated_by'], 'integer'],
             [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status'], 'safe'],
+            [['email'], 'unique', 'targetAttribute' => 'email'],
             [['member_code', 'first_name', 'last_name', 'id_card_photo', 'photo'], 'string', 'max' => 100],
             [['email', 'password', 'address', 'blocked_reason'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
@@ -145,11 +149,28 @@ class Member extends BaseActiveRecord implements IdentityInterface
         ];
     }
     
+    protected function setBranchMapping()
+    {
+        $branchs = Branch::find()->actived()->all();
+        foreach ($branchs as $branch) :
+            $branchMapping = json_decode($branch->district_mapping);
+            if (in_array($this->district_id, $branchMapping)) {
+                return $branch->id;
+            }
+            $this->setPassword($this->password);
+        endforeach;
+        
+        return Branch::DEFAULT_BRANCH_ID;
+    }
+    
     public function beforeSave($insert) {
         
         if ($insert) {
             $this->member_code = self::generateMemberCode($this->id_card_number);
+            $this->branch_id = $this->setBranchMapping();
         }
+        
+        $this->processUploadFile();
         
         return parent::beforeSave($insert);
     }
@@ -184,6 +205,16 @@ class Member extends BaseActiveRecord implements IdentityInterface
     public function getBranch()
     {
         return $this->hasOne(Branch::className(), ['id' => 'branch_id']);
+    }
+    
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
     
     /**
@@ -241,6 +272,26 @@ class Member extends BaseActiveRecord implements IdentityInterface
     }
     
     /**
+     * return boolean whether status active or not.
+     * 
+     * @return boolean
+     */
+    public function isInActive()
+    {
+        return $this->status === self::STATUS_INACTIVE;
+    }
+    
+    /**
+     * return boolean whether status active or not.
+     * 
+     * @return boolean
+     */
+    public function isNeedConfirmed()
+    {
+        return $this->status === self::STATUS_WAITING_APPROVAL;
+    }
+    
+    /**
      * @param type $identityNumber
      * @param type $prefix
      * @param type $padLength
@@ -269,6 +320,66 @@ class Member extends BaseActiveRecord implements IdentityInterface
         $number = str_pad($increment, $padLength, '0', STR_PAD_LEFT);
 
         return $left . $separator . $number;
+    }
+    
+    /**
+     * - delete photoFile
+     * 
+     * @return type
+     */
+    public function beforeDelete()
+    {
+        /* todo: delete the corresponding file in storage */
+        $this->deletePhoto();
+        $this->deleteIdCardPhoto();
+        
+        return parent::beforeDelete();
+    }
+    
+    protected function deletePhoto()
+    {
+        @unlink(Yii::getAlias('@app/' . $this->path) . $this->photo);
+    }
+    
+    protected function deleteIdCardPhoto()
+    {
+        @unlink(Yii::getAlias('@app/' . $this->path) . $this->id_card_photo);
+    }
+    
+    /**
+     * process uploaded file
+     * 
+     * @return boolean
+     */
+    public function processUploadFile()
+    {
+        if (!empty($this->photoFile)) {
+            $this->deletePhoto();
+
+            $path = str_replace('web/', '', $this->path);
+            
+            // generate filename
+            $filename = Inflector::slug($this->first_name . '-' . Yii::$app->security->generateRandomString(20));
+            $filename = $filename . '.' . $this->photoFile->extension;
+            
+            $this->photoFile->saveAs($path . $filename);
+            $this->photo = $filename;
+        }
+        
+        if (!empty($this->idCardPhotoFile)) {
+            $this->deleteIdCardPhoto();
+
+            $path = str_replace('web/', '', $this->path);
+            
+            // generate filename
+            $filename = Inflector::slug($this->first_name . '-' . Yii::$app->security->generateRandomString(20));
+            $filename = $filename . '.' . $this->idCardPhotoFile->extension;
+            
+            $this->idCardPhotoFile->saveAs($path . $filename);
+            $this->id_card_photo = $filename;
+        }
+
+        return true;
     }
     
     /**
