@@ -1,9 +1,12 @@
 <?php
 
+use app\helpers\DetailViewHelper;
+use app\models\GalleryCategory;
+use yii\web\View;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\GalleryCategory */
+/* @var $this View */
+/* @var $model GalleryCategory */
 ?>
 <div class="gallery-category-view">
  
@@ -14,12 +17,16 @@ use yii\widgets\DetailView;
             'name',
             'slug',
             'description:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->getStatusWithStyle(),
+                'format' => 'raw',
+            ],
             'order',
             'created_at',
             'updated_at',
-            'created_by',
-            'updated_by',
+            DetailViewHelper::author($model, 'created_by'),
+            DetailViewHelper::author($model, 'updated_by'),
         ],
     ]) ?>
 

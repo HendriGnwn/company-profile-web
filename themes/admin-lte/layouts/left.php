@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
         ?>
         <?= Menu::widget(
             [
-                'options' => ['class' => 'sidebar-menu'],
+                'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
                 'items' => $items
             ]
         ) ?>

@@ -105,7 +105,7 @@ class View extends BaseView {
         $defaultTitle = $this->title;
         $defaultType = 'article';
         $defaultUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(Yii::$app->request->url);
-        $defaultImage = Config::getAppSeoImageUrl();
+        $defaultImage = Yii::$app->getUrlManager()->createAbsoluteUrl(Config::getAppSeoImageUrl());
         $defaultDescription = Config::getAppMetaDescription();
 
         /** Twitter card data * */

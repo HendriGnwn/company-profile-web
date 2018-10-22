@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 /* @var $this View */
 /* @var $postDetail BlogPost */
 
-$this->title = Yii::t('app', 'Member Signup');
+$this->title = Yii::t('app', 'Sign Up');
 $this->params['breadcrumbs'][] = ['label' => 'Member', 'url' =>['#']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -65,18 +65,7 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                     ?>
                     <!-- login_wrapper -->
                     <div class="login_wrapper">
-                        <?php if (Yii::$app->session->hasFlash('success')) { ?>
-                            <div class="alert fade_success">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                <strong><?= Yii::t('app', 'Success Message') ?>: <?= Yii::$app->session->getFlash('success') ?></strong>
-                            </div>
-                        <?php } ?>
-                        <?php if (Yii::$app->session->hasFlash('error')) { ?>
-                            <div class="alert fade_error">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                <strong><?= Yii::t('app', 'Error Message') ?>: <?= Yii::$app->session->getFlash('error') ?></strong>
-                            </div>
-                        <?php } ?>
+                        <?= $this->render('_alert') ?>
                         
                         <?= $form->errorSummary($model, ['class' => 'alert alert_error', 'style'=>'text-transform: inherit']) ?>
                         

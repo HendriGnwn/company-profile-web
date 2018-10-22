@@ -18,7 +18,7 @@ use yii\widgets\Menu;
                     <div class="wrapper_second_about">
                         <h4>About Us</h4>
                         <div class="abotus_content">
-                            <p>Proin gravida nibh vel velit auctr aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit aks consequat vel velit auctor....</p>
+                            <p><?= Config::getAppMotto() ?></p>
                         </div>
                         <div class="aboutus_link">
                             <a href="<?= Url::to('about-us') ?>">Read More<i class="fa fa-caret-right" aria-hidden="true"></i></a>

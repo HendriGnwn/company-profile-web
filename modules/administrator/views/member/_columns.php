@@ -1,4 +1,11 @@
 <?php
+
+use app\models\Branch;
+use app\models\Member;
+use kartik\grid\GridView;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 return [
@@ -31,8 +38,32 @@ return [
         'attribute'=>'email',
     ],
     [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'password',
+        'attribute' => 'branch_id',
+        'filterType' => GridView::FILTER_SELECT2,
+        'filter' => ArrayHelper::map(Branch::find()->actived()->orderBy(['name'=>SORT_ASC])->all(), 'id', 'name'),
+        'filterWidgetOptions' => [
+            'theme' => Select2::THEME_DEFAULT,
+            'pluginOptions' => ['allowClear' => true],
+        ],
+        'filterInputOptions' => ['placeholder' => '-- Select --'],
+        'format' => 'raw',
+        'content' => function ($model) {
+            return $model->branch ? $model->branch->name : $model->branch_id;
+        }
+    ],
+    [
+        'attribute' => 'status',
+        'filterType' => GridView::FILTER_SELECT2,
+        'filter' => Member::statusLabels(),
+        'filterWidgetOptions' => [
+            'theme' => Select2::THEME_DEFAULT,
+            'pluginOptions' => ['allowClear' => true],
+        ],
+        'filterInputOptions' => ['placeholder' => '-- Select --'],
+        'format' => 'raw',
+        'content' => function ($model) {
+            return $model->getStatusWithStyle();
+        }
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
@@ -78,10 +109,10 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'status',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'confirmed_at',
-    // ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'confirmed_at',
+     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'confirmed_by',
@@ -94,10 +125,10 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'blocked_reason',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'created_at',
-    // ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'created_at',
+     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'updated_at',
@@ -114,9 +145,25 @@ return [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
+        'template' => '{status} {view} {update} {delete}',
         'urlCreator' => function($action, $model, $key, $index) { 
                 return Url::to([$action,'id'=>$key]);
         },
+                
+       'buttons' => [
+            'status' => function ($url, $model) {
+                return Html::a(
+                    '<i class="fa fa-flag"></i>',
+                    $url, 
+                    [
+                        'title' => 'Change Status',
+                        'data-pjax' => '0',
+                        'role'=>'modal-remote',
+                        'data-toggle'=>'tooltip'
+                    ]
+                );
+            },
+        ],
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
         'deleteOptions'=>['role'=>'modal-remote','title'=>'Delete', 

@@ -1,17 +1,34 @@
 <?php
+
+use app\models\Branch;
+use app\models\Member;
+use app\models\Provinces;
+use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Member */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $this View */
+/* @var $model Member */
+/* @var $form ActiveForm */
 ?>
 
 <div class="member-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    
+   <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'member_code')->textInput(['maxlength' => true]) ?>
+    <?php if ($model->isNewRecord): ?>
+        <?php
+        $prefix = Member::prefixMemberCodeLabels();
+        $options = ['data' => $prefix, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => 'Select']];
+        ?>
+        <?= $form->field($model, 'prefix_member_code')->widget(Select2::className(), $options) ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
 
@@ -25,40 +42,62 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_card_number')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_card_photo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'idCardPhotoFile')->fileInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'photoFile')->fileInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address')->textarea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'province_id')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'regency_id')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'district_id')->textInput(['maxlength' => true]) ?>
-
+    <?php
+    $provinces = ArrayHelper::map(Provinces::find()->all(), 'id', 'name');
+    $provinceOptions = ['data' => $provinces, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => 'Select']];
+    ?>
+    <?= $form->field($model, 'province_id')->widget(Select2::className(), $provinceOptions) ?>
+    
+    <?= Html::hiddenInput('regency_id_selected', $model->isNewRecord ? '' : $model->regency_id, ['id'=>'regency_id_selected']) ?>
+    
+    <?= $form->field($model, 'regency_id')->widget(DepDrop::classname(), [
+        'type'=>DepDrop::TYPE_SELECT2,
+        'options'=>['prompt'=>$model->getAttributeLabel('regency_id')],
+        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+        'pluginOptions'=>[
+            'depends'=>['member-province_id'],
+            'initialize' => !$model->isNewRecord ? true : false,
+            'placeholder'=>$model->getAttributeLabel('regency_id'),
+            'url'=>Url::to(['/ajax/find-regency']),
+            'params'=>['regency_id_selected']
+        ]
+    ]) ?>
+    
+    <?= Html::hiddenInput('district_id_selected', $model->isNewRecord ? '' : $model->district_id, ['id'=>'district_id_selected']) ?>
+    
+    <?= $form->field($model, 'district_id')->widget(DepDrop::classname(), [
+        'type'=>DepDrop::TYPE_SELECT2,
+        'options'=>['prompt'=>$model->getAttributeLabel('district_id')],
+        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+        'pluginOptions'=>[
+            'depends'=>['member-regency_id'],
+            'initialize' => !$model->isNewRecord ? true : false,
+            'placeholder'=>$model->getAttributeLabel('district_id'),
+            'url'=>Url::to(['/ajax/find-district']),
+            'params'=>['district_id_selected']
+        ]
+    ]) ?>
     <?= $form->field($model, 'postal_code')->textInput() ?>
 
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+    <?php
+    $provinces = ArrayHelper::map(Branch::find()->actived()->all(), 'id', 'name');
+    $provinceOptions = ['data' => $provinces, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => 'Select']];
+    ?>
+    <?= $form->field($model, 'branch_id')->widget(Select2::className(), $provinceOptions) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php
+    $status = Member::statusLabels();
+    $statusOptions = ['data' => $status, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => 'Choose One']];
+    ?>
+    <?= $form->field($model, 'status')->widget(Select2::className(), $statusOptions) ?>
 
-    <?= $form->field($model, 'confirmed_at')->textInput() ?>
-
-    <?= $form->field($model, 'confirmed_by')->textInput() ?>
-
-    <?= $form->field($model, 'blocked_at')->textInput() ?>
-
-    <?= $form->field($model, 'blocked_reason')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
+    <?= $form->field($model, 'blocked_reason')->textarea(['maxlength' => true]) ?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

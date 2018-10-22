@@ -55,6 +55,68 @@ class Application extends \yii\web\Application
 
         $result = $command->execute();
         
+//        $this->view->registerCss("
+//           .top-bar, .blog_section .blog-post-wrapper .post-thumbnail .posted-date {
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .signin_wrapper, #return-to-top {
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .navbar-default .navbar-nav>.active>a, 
+//            .navbar-default .navbar-nav>.active>a:focus, 
+//            .navbar-default .navbar-nav>.active>a:hover, 
+//            .portfolio_img_text a, 
+//            .copyright_content a {
+//                color: ".Config::getAppColorPrimary().";
+//            }
+//            .tp-caption.WebProduct-Button, .WebProduct-Button {
+//                border-color: ".Config::getAppColorPrimary().";
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .tp-leftarrow, .tp-rightarrow {
+//                border: 1px solid ".Config::getAppColorPrimary().";
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .icon_text:hover, #filter li a:hover, #filter li a.active {
+//                border-color: ".Config::getAppColorPrimary().";
+//            }
+//            .portfolio_img_text a:hover, .comments_form_section .btn-primary {
+//                border: 1px solid ".Config::getAppColorPrimary().";
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .comments_form_section .btn-primary.focus, .comments_form_section .btn-primary:hover {
+//                background-color: transparent;
+//                color: ".Config::getAppColorPrimary().";
+//            }
+//            .counterFour {
+//                background-color: ".Config::getAppColorSecondary().";
+//            }
+//            .footer_wrapper_second h4:after {
+//                border: 2px solid ".Config::getAppColorPrimary().";
+//            }
+//            .footer {
+//                background-color: ".Config::getAppColorFooterContent().";
+//            }
+//            .copyright_wrapper {
+//                background-color: ".Config::getAppColorFooterCopyright().";
+//            }
+//            .dropdown-menu li a:hover, .dropdown-menu>li>a:focus, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+//                color: ".Config::getAppColorPrimary().";
+//            }
+//            .dropdown-menu {
+//                border-top: 4px solid ".Config::getAppColorPrimary().";
+//            }
+//            .icon_text:hover .icon_text_effect {
+//                border: 2px solid ".Config::getAppColorPrimary().";
+//            }
+//            .icon_text:hover .fa, #filter li a:hover, #filter li a.active, .signin_wrapper:hover, .signin_wrapper .signin_dropdown .btn, .signin_wrapper .signin_dropdown .btn:hover {
+//                background-color: ".Config::getAppColorPrimary().";
+//            }
+//            .social_icon_wrapper ul li a {
+//                color: white;
+//            }
+//        ");
+        
         return parent::run();
     }
 }

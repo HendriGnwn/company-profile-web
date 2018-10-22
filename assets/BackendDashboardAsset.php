@@ -27,4 +27,8 @@ class BackendDashboardAsset extends AssetBundle
         'plugins/knob/jquery.knob.js',
         'plugins/sparkline/jquery.sparkline.min.js'
     ];
+    public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+    ];
 }

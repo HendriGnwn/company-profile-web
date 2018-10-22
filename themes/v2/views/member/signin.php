@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $this View */
 /* @var $postDetail BlogPost */
 
-$this->title = Yii::t('app', 'Member Signin');
+$this->title = Yii::t('app', 'Sign In');
 $this->params['breadcrumbs'][] = ['label' => 'Member', 'url' =>['#']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -58,6 +58,11 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                     ?>
                     <!-- login_wrapper -->
                     <div class="login_wrapper">
+                        
+                        <?= $this->render('_alert') ?>
+                        
+                        <?= $form->errorSummary($model, ['class' => 'alert alert_error', 'style'=>'text-transform: inherit']) ?>
+                        
                         <div class="formsix-pos">
                             <?= $form->field($model, 'email')
                                 ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('email')]) ?>

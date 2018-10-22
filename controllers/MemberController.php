@@ -2,11 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\Banner;
 use app\models\Member;
+use app\models\MemberForgotPasswordForm;
 use app\models\MemberLoginForm;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use const YII_ENV_TEST;
 
@@ -18,6 +22,17 @@ class MemberController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['signup', 'signin', 'forgot-password'],
+                'user' => 'member',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -59,7 +74,61 @@ class MemberController extends Controller
             return $this->redirect(['signin']);
         }
         
-        return $this->render('profile');
+        $model = Member::findOne(Yii::$app->member->id);
+        
+        return $this->render('profile', compact('model'));
+    }
+    
+    public function actionPhoto()
+    {
+        $model = $this->findModel();
+        
+        return $this->render('photo', compact('model'));
+    }
+    
+    public function actionUpdateProfile()
+    {
+        $model = $this->findModel();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+            $model->idCardPhotoFile = UploadedFile::getInstance($model, 'idCardPhotoFile');
+            
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Update Profile Berhasil');
+                return $this->redirect(['/member/profile']);
+            }
+        }
+        
+        return $this->render('update-profile', compact('model'));
+    }
+    
+    public function actionChangePassword()
+    {
+        $model = $this->findModel();
+        $model->setScenario(Member::SCENARIO_CHANGE_PASSWORD);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Ubah password berhasil');
+            return $this->redirect(['/member/change-password']);
+        }
+        
+        return $this->render('change-password', compact('model'));
+    }
+    
+    public function actionForgotPassword()
+    {
+        if (!\Yii::$app->member->isGuest) {
+            return $this->redirect(['profile']);
+        }
+        
+        $model = new MemberForgotPasswordForm();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->send()) {
+            Yii::$app->session->setFlash('success', 'Silahkan cek email Anda');
+            return $this->redirect(['/member/forgot-password']);
+        }
+        
+        return $this->render('forgot-password', compact('model'));
     }
 
     /**
@@ -74,7 +143,7 @@ class MemberController extends Controller
         }
         
         $model = new Member();
-        $model->status = Member::STATUS_WAITING_APPROVAL;
+        $model->setScenario(Member::SCENARIO_REGISTER);
         
         if ($model->load(Yii::$app->request->post())) {
             $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
@@ -116,5 +185,21 @@ class MemberController extends Controller
     {
         Yii::$app->member->logout();
         return $this->redirect(['signin']);
+    }
+    
+    /**
+     * Finds the Banner model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Banner the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel()
+    {
+        if (($model = Member::findOne(Yii::$app->member->id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

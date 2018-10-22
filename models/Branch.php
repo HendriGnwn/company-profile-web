@@ -14,6 +14,8 @@ use Yii;
  * @property string $province_id
  * @property string $regency_id
  * @property string $district_id
+ * @property string $address_mapping
+ * @property string $district_mapping
  * @property integer $postal_code
  * @property integer $status
  * @property string $created_at
@@ -45,10 +47,10 @@ class Branch extends \app\models\BaseActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required'],
+            [['name', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code', 'district_mapping'], 'required'],
             [['description'], 'string'],
             [['postal_code', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'district_mapping', 'address_mapping'], 'safe'],
             [['name', 'address'], 'string', 'max' => 255],
             [['province_id'], 'string', 'max' => 2],
             [['regency_id'], 'string', 'max' => 4],
@@ -69,9 +71,10 @@ class Branch extends \app\models\BaseActiveRecord
             'name' => Yii::t('app', 'Name'),
             'description' => Yii::t('app', 'Description'),
             'address' => Yii::t('app', 'Address'),
-            'province_id' => Yii::t('app', 'Province ID'),
-            'regency_id' => Yii::t('app', 'Regency ID'),
-            'district_id' => Yii::t('app', 'District ID'),
+            'province_id' => Yii::t('app', 'Province'),
+            'regency_id' => Yii::t('app', 'Regency'),
+            'district_id' => Yii::t('app', 'District'),
+            'district_mapping' => Yii::t('app', 'District Mapping (for Member get ID Card)'),
             'postal_code' => Yii::t('app', 'Postal Code'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -79,6 +82,27 @@ class Branch extends \app\models\BaseActiveRecord
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
         ];
+    }
+    
+    public function beforeSave($insert) {
+        $this->address_mapping = [
+            [
+                $this->province_id => [
+                    [
+                        $this->regency_id => $this->district_mapping
+                    ]
+                ]
+            ]
+        ];
+        $this->address_mapping = json_encode($this->address_mapping);
+        $this->district_mapping = json_encode($this->district_mapping);
+        return parent::beforeSave($insert);
+    }
+    
+    public function afterFind() {
+        $this->address_mapping = json_decode($this->address_mapping, true);
+        $this->district_mapping = json_decode($this->district_mapping, true);
+        return parent::afterFind();
     }
 
     /**
@@ -119,5 +143,10 @@ class Branch extends \app\models\BaseActiveRecord
     public function getMembers()
     {
         return $this->hasMany(Member::className(), ['branch_id' => 'id']);
+    }
+    
+    public function getDistrictMappings()
+    {
+        return Districts::find()->where(['in', 'id', $this->district_mapping])->all();
     }
 }

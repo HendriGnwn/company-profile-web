@@ -88,6 +88,22 @@ class Config extends \yii\db\ActiveRecord
             ->scalar();
         return $result;
     }
+    
+	/**
+     * Return label of setting by its name
+     *
+     * @param string $name
+     * @return string
+     */
+    public static function getLabelByName($name)
+    {
+        $result = self::find()
+            ->select('label')
+            ->where(['name' => $name])
+            ->limit(1)
+            ->scalar();
+        return $result;
+    }
 
     /**
      * Get setting with boolean value by its name.
@@ -553,5 +569,40 @@ class Config extends \yii\db\ActiveRecord
     public static function getAppSeoAltImage()
     {
         return self::getValueByName('app_seo_alt_image');
+    }
+    
+    public static function getAppLogo()
+    {
+        return self::getValueByName('app_logo');
+    }
+    
+    public static function getAppFavicon()
+    {
+        return self::getValueByName('app_favicon');
+    }
+    
+    public static function getAppCompanyName()
+    {
+        return self::getValueByName('app_company_name');
+    }
+    
+    public static function getAppColorPrimary()
+    {
+        return self::getValueByName('app_color_primary');
+    }
+    
+    public static function getAppColorSecondary()
+    {
+        return self::getValueByName('app_color_secondary');
+    }
+    
+    public static function getAppColorFooterContent()
+    {
+        return self::getValueByName('app_color_footer_content');
+    }
+    
+    public static function getAppColorFooterCopyright()
+    {
+        return self::getValueByName('app_color_footer_copyright');
     }
 }

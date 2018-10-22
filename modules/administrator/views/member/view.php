@@ -1,9 +1,12 @@
 <?php
 
+use app\helpers\DetailViewHelper;
+use app\models\Member;
+use yii\web\View;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Member */
+/* @var $this View */
+/* @var $model Member */
 ?>
 <div class="member-view">
  
@@ -15,26 +18,50 @@ use yii\widgets\DetailView;
             'first_name',
             'last_name',
             'email:email',
-            'password',
+//            'password',
             'phone',
             'id_card_number',
-            'id_card_photo',
-            'photo',
+            [
+                'attribute' => 'id_card_photo',
+                'value' => $model->getIdCardPhotoUrlHtml(),
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'photo',
+                'value' => $model->getPhotoUrlHtml(),
+                'format' => 'raw',
+            ],
             'address',
-            'province_id',
-            'regency_id',
-            'district_id',
+            [
+                'attribute' => 'province_id',
+                'value' => $model->province ? $model->province->name : $model->province_id
+            ],
+            [
+                'attribute' => 'regency_id',
+                'value' => $model->regency ? $model->regency->name : $model->regency_id
+            ],
+            [
+                'attribute' => 'district_id',
+                'value' => $model->district ? $model->district->name : $model->district_id
+            ],
             'postal_code',
-            'branch_id',
-            'status',
+            [
+                'attribute' => 'branch_id',
+                'value' => $model->branch ? $model->branch->name : $model->branch_id,
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model->getStatusWithStyle(),
+                'format' => 'raw',
+            ],
             'confirmed_at',
-            'confirmed_by',
+            DetailViewHelper::author($model, 'confirmed_by'),
             'blocked_at',
             'blocked_reason',
             'created_at',
             'updated_at',
-            'created_by',
-            'updated_by',
+            DetailViewHelper::author($model, 'created_by'),
+            DetailViewHelper::author($model, 'updated_by'),
         ],
     ]) ?>
 

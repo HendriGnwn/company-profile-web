@@ -24,7 +24,7 @@ class AjaxController extends BaseController
     public function actionFindRegency()
     {
         $key = \Yii::$app->request->post('depdrop_parents');
-        $selected = \Yii::$app->request->get('selected');
+        $selected = \Yii::$app->request->post('depdrop_params');
         if ($key) {
             $models = \app\models\Regencies::find()->where(['province_id' => $key])->all();
             $result = [];
@@ -47,7 +47,11 @@ class AjaxController extends BaseController
     public function actionFindDistrict()
     {
         $key = \Yii::$app->request->post('depdrop_parents');
-        $selected = \Yii::$app->request->get('selected');
+        $selected = \Yii::$app->request->post('depdrop_params');
+//        if (!is_string($selected)) {
+//            var_dump($selected);
+//            $selected = json_decode($selected, true);
+//        }
         if ($key) {
             $models = \app\models\Districts::find()->where(['regency_id' => $key])->all();
             $result = [];

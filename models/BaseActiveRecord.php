@@ -88,7 +88,7 @@ abstract class BaseActiveRecord extends ActiveRecord
 	
 	public function getStatusLabel()
 	{
-		$list = self::statusLabels();
+		$list = static::statusLabels();
 		return $list[$this->status] ? $list[$this->status] : $this->status;
 	}
 	

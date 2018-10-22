@@ -2,10 +2,14 @@
 
 namespace app\models;
 
+use app\helpers\MailHelper;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Inflector;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 
@@ -52,6 +56,16 @@ class Member extends BaseActiveRecord implements IdentityInterface
     
     const STATUS_WAITING_APPROVAL = 5;
     
+    const SCENARIO_REGISTER = 'register';
+    const SCENARIO_CHANGE_PASSWORD = 'change-password';
+    const SCENARIO_CHANGE_STATUS = 'change-status';
+    
+    public $current_password;
+    public $new_password;
+    public $confirm_password;
+    
+    public $prefix_member_code;
+    
     /**
      * @var UploadedFile
      */
@@ -90,12 +104,14 @@ class Member extends BaseActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'email', 'password', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required'],
+            [['first_name', 'email', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_REGISTER, self::SCENARIO_UPDATE, self::SCENARIO_INSERT]],
+            [['password', 'prefix_member_code'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_REGISTER]],
+            [['status'], 'required', 'on' => self::SCENARIO_CHANGE_STATUS],
             [['postal_code', 'branch_id', 'status', 'confirmed_by', 'created_by', 'updated_by'], 'integer'],
-            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status'], 'safe'],
+            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status', 'blocked_reason'], 'safe'],
             [['email'], 'unique', 'targetAttribute' => 'email'],
             [['member_code', 'first_name', 'last_name', 'id_card_photo', 'photo'], 'string', 'max' => 100],
-            [['email', 'password', 'address', 'blocked_reason'], 'string', 'max' => 255],
+            [['email', 'password', 'address'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
             [['id_card_number'], 'string', 'max' => 25],
             [['province_id'], 'string', 'max' => 2],
@@ -108,13 +124,17 @@ class Member extends BaseActiveRecord implements IdentityInterface
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
             [['photoFile', 'idCardPhotoFile'], 'file', 'skipOnEmpty' => false, 'checkExtensionByMimeType' => true,
                 'extensions' => ['jpg', 'jpeg', 'png'],
-                'maxSize' => 1024 * 1024 * 1, 'on' => self::SCENARIO_INSERT],
+                'maxSize' => 1024 * 1024 * 1, 'on' => [self::SCENARIO_INSERT,self::SCENARIO_REGISTER]],
             [['photoFile', 'idCardPhotoFile'], 'file', 'skipOnEmpty' => true, 'checkExtensionByMimeType' => true,
                 'extensions' => ['jpg', 'jpeg', 'png'],
                 'maxSize' => 1024 * 1024 * 1, 'on' => self::SCENARIO_UPDATE],
+            [['current_password', 'new_password', 'confirm_password'], 'required', 'on'=>self::SCENARIO_CHANGE_PASSWORD],
+            [['confirm_password'],'compare','compareAttribute'=>'new_password'],
+            [['current_password', 'new_password', 'confirm_password'], 'safe'],
+            [['new_password', 'confirm_password'], 'string', 'min'=>6],
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -122,6 +142,9 @@ class Member extends BaseActiveRecord implements IdentityInterface
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'current_password' => Yii::t('app', 'Current Password'),
+            'new_password' => Yii::t('app', 'New Password'),
+            'confirm_passsword' => Yii::t('app', 'Confirm Password'),
             'member_code' => Yii::t('app', 'Member Code'),
             'first_name' => Yii::t('app', 'First Name'),
             'last_name' => Yii::t('app', 'Last Name'),
@@ -136,7 +159,7 @@ class Member extends BaseActiveRecord implements IdentityInterface
             'regency_id' => Yii::t('app', 'City'),
             'district_id' => Yii::t('app', 'District'),
             'postal_code' => Yii::t('app', 'Postal Code'),
-            'branch_id' => Yii::t('app', 'Branch'),
+            'branch_id' => Yii::t('app', 'Branch Office'),
             'status' => Yii::t('app', 'Status'),
             'confirmed_at' => Yii::t('app', 'Confirmed At'),
             'confirmed_by' => Yii::t('app', 'Confirmed By'),
@@ -163,16 +186,52 @@ class Member extends BaseActiveRecord implements IdentityInterface
         return Branch::DEFAULT_BRANCH_ID;
     }
     
+    public function beforeValidate() {
+        
+        if ($this->scenario == self::SCENARIO_REGISTER) {
+            $this->prefix_member_code = self::PREFIX_MEMBER_GENERAL;
+        }
+        
+        return parent::beforeValidate();
+    }
+    
     public function beforeSave($insert) {
         
         if ($insert) {
-            $this->member_code = self::generateMemberCode($this->id_card_number);
+            $this->member_code = self::generateMemberCode($this->id_card_number, $this->prefix_member_code);
+        }
+        
+        if ($this->scenario == self::SCENARIO_CHANGE_PASSWORD) {
+            $this->setPassword($this->new_password);
+        }
+        
+        if ($this->scenario == self::SCENARIO_REGISTER) {
             $this->branch_id = $this->setBranchMapping();
         }
         
         $this->processUploadFile();
         
+        switch ($this->status) {
+            case self::STATUS_INACTIVE :
+                $this->blocked_at = date('Y-m-d H:i:s');
+                break;
+            case self::STATUS_ACTIVE : 
+                $this->confirmed_at = date('Y-m-d H:i:s');
+                $this->confirmed_by = Yii::$app->user->id;
+                $this->blocked_at = null;
+                break;
+        }
+        
         return parent::beforeSave($insert);
+    }
+    
+    public function afterSave($insert, $changedAttributes) {
+        
+        if ($this->scenario == self::SCENARIO_REGISTER || $this->scenario == self::SCENARIO_INSERT) {
+            $this->sendRegisterNotification();
+        }
+        
+        return parent::afterSave($insert, $changedAttributes);
     }
 
     /**
@@ -233,7 +292,7 @@ class Member extends BaseActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'status' => [self::STATUS_ACTIVE, self::STATUS_WAITING_APPROVAL]]);
     }
 
     /**
@@ -383,6 +442,66 @@ class Member extends BaseActiveRecord implements IdentityInterface
     }
     
     /**
+     * get url file
+     * 
+     * @return type
+     */
+    public function getPhotoUrl() 
+    {
+        if (empty($this->photo)) {
+            return null;
+        }
+
+        $path = $this->path . $this->photo;
+
+        if (!file_exists(Yii::getAlias('@app/' . $path))) {
+            return 'https://via.placeholder.com/550x550';
+        }
+
+        return Url::to('@' . $path, true);
+    }
+    
+    /**
+     * get url file
+     * 
+     * @return type
+     */
+    public function getIdCardPhotoUrl() 
+    {
+        if (empty($this->id_card_photo)) {
+            return null;
+        }
+
+        $path = $this->path . $this->id_card_photo;
+
+        if (!file_exists(Yii::getAlias('@app/' . $path))) {
+            return 'https://via.placeholder.com/550x550';
+        }
+
+        return Url::to('@' . $path, true);
+    }
+    
+    public function getPhotoUrlHtml($options = ['target' => '_blank'])
+    {
+        return Html::a($this->getPhotoUrl(), $this->getPhotoUrl(), $options);
+    }
+    
+    public function getIdCardPhotoUrlHtml($options = ['target' => '_blank'])
+    {
+        return Html::a($this->getIdCardPhotoUrl(), $this->getIdCardPhotoUrl(), $options);
+    }
+    
+    public function getPhotoImg($options = ['class' => 'img-responsive'])
+    {
+        return Html::img($this->getPhotoUrl(), $options);
+    }
+    
+    public function getIdCardPhotoImg($options = ['class' => 'img-responsive'])
+    {
+        return Html::img($this->getIdCardPhotoUrl(), $options);
+    }
+    
+    /**
      * set path
      * 
      * @param type $value
@@ -398,5 +517,73 @@ class Member extends BaseActiveRecord implements IdentityInterface
     public function getPath()
     {
         return $this->_path;
+    }
+    
+    public function getStatusWithStyle() {
+        switch ($this->status) {
+			case self::STATUS_ACTIVE :
+				return Html::label($this->getStatusLabel(), null, ['class'=>'label label-success label-sm']);
+			case self::STATUS_INACTIVE :
+				return Html::label($this->getStatusLabel(), null, ['class'=>'label label-danger label-sm']);
+			case self::STATUS_WAITING_APPROVAL :
+				return Html::label($this->getStatusLabel(), null, ['class'=>'label label-warning label-sm']);
+			default :
+				return Html::label($this->getStatusLabel(), null, ['class'=>'label label-default label-sm']);
+		}
+    }
+    
+    public static function statusLabels() {
+        return ArrayHelper::merge(parent::statusLabels(), [
+            self::STATUS_WAITING_APPROVAL => Yii::t('app', 'Need an Approve')
+        ]);
+    }
+    
+    public function sendForgotPasswordNotification()
+    {
+        return true;
+        $model = $this;
+        MailHelper::sendMail([
+            'to' => $this->email,
+            'replyTo' => [],
+            'subject' => 'Forgot Password',
+            'view' => ['html' => 'member/forgot-password'],
+            'viewParams' => [
+                'model' => $model
+            ],
+        ]);
+        
+        return true;
+    }
+    
+    public function sendRegisterNotification()
+    {
+        return true;
+        $model = $this;
+        MailHelper::sendMail([
+            'to' => $this->email,
+            'replyTo' => [],
+            'subject' => 'Register Sukses',
+            'view' => ['html' => 'member/register'],
+            'viewParams' => [
+                'model' => $model
+            ],
+        ]);
+        
+        return true;
+    }
+    
+    public function getFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    
+    public static function prefixMemberCodeLabels()
+    {
+        return [
+            self::PREFIX_MEMBER_MAIN => 'Pusat',
+            self::PREFIX_MEMBER_PROVINCE => 'Provinsi',
+            self::PREFIX_MEMBER_CITY => 'Kota',
+            self::PREFIX_MEMBER_GENERAL => 'Umum',
+        ];
     }
 }

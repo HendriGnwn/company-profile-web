@@ -72,9 +72,10 @@ use yii\widgets\ActiveForm;
 </li>
 <?php else: ?>
 <li class="signin_wrapper">
-    <a href="#">
-        <i class="fa fa-user"></i> Hi <?= Yii::$app->member->identity->first_name ?>
-    </a>
+    <?= Html::a(
+        '<i class="fa fa-user"></i>  Hi ' . Yii::$app->member->identity->first_name,
+        ['member/profile']
+    ) ?>
 </li>
 <li class="signin_wrapper">
     <?= Html::a(

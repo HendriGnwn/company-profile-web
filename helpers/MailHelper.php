@@ -39,7 +39,7 @@ class MailHelper
 		if (!isset($params['subject'])) {
 			throw new Exception("Missing parameter : subject");
 		}
-		$subject = $params['subject'];
+		$subject = Config::getEmailSubject() . ' | ' . $params['subject'];
 
 		if (!isset($params['view'])) {
 			throw new Exception("Missing parameter : view");

@@ -2,14 +2,15 @@
 
 namespace app\modules\administrator\controllers;
 
-use Yii;
 use app\models\Member;
-use app\modules\administrator\models\MemberSearch;
 use app\modules\administrator\controllers\BaseController;
-use yii\web\NotFoundHttpException;
+use app\modules\administrator\models\MemberSearch;
+use Yii;
 use yii\filters\VerbFilter;
-use \yii\web\Response;
 use yii\helpers\Html;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * MemberController implements the CRUD actions for Member model.
@@ -83,6 +84,7 @@ class MemberController extends BaseController
     {
         $request = Yii::$app->request;
         $model = new Member();  
+        $model->setScenario(Member::SCENARIO_INSERT);
 
         if($request->isAjax){
             /*
@@ -99,15 +101,20 @@ class MemberController extends BaseController
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
+            }else if($model->load($request->post())){
+                $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+                $model->idCardPhotoFile = UploadedFile::getInstance($model, 'idCardPhotoFile');
+                if ($model->save()) {
+                    return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new Member",
                     'content'=>'<span class="text-success">Create Member success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
-                ];         
+                    ];         
+                }
+                goto redirect;
             }else{           
                 return [
                     'title'=> "Create new Member",
@@ -120,6 +127,7 @@ class MemberController extends BaseController
                 ];         
             }
         }else{
+            redirect:
             /*
             *   Process for non-ajax request
             */
@@ -160,6 +168,73 @@ class MemberController extends BaseController
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
+            }else if($model->load($request->post())){
+                $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+                $model->idCardPhotoFile = UploadedFile::getInstance($model, 'idCardPhotoFile');
+                if ($model->save()) {
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Member #".$id,
+                        'content'=>$this->renderAjax('view', [
+                            'model' => $model,
+                        ]),
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    ];    
+                }
+                goto redirect;
+            }else{
+                 return [
+                    'title'=> "Update Member #".$id,
+                    'content'=>$this->renderAjax('update', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];        
+            }
+        }else{
+            redirect:
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }
+    }
+    
+    /**
+     * Updates an existing Member model.
+     * For ajax request will return json object
+     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionStatus($id)
+    {
+        $request = Yii::$app->request;
+        $model = $this->findModel($id);   
+        $model->setScenario(Member::SCENARIO_CHANGE_STATUS);
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Update Member Status #".$id,
+                    'content'=>$this->renderAjax('update-status', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -172,8 +247,8 @@ class MemberController extends BaseController
                 ];    
             }else{
                  return [
-                    'title'=> "Update Member #".$id,
-                    'content'=>$this->renderAjax('update', [
+                    'title'=> "Update Member Status #".$id,
+                    'content'=>$this->renderAjax('update-status', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
@@ -187,7 +262,7 @@ class MemberController extends BaseController
             if ($model->load($request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                return $this->render('update', [
+                return $this->render('update-status', [
                     'model' => $model,
                 ]);
             }

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%gallery_category}}".
@@ -18,7 +20,7 @@ use Yii;
  * @property integer $created_by
  * @property integer $updated_by
  */
-class GalleryCategory extends \app\models\BaseActiveRecord
+class GalleryCategory extends BaseActiveRecord
 {
     /**
      * @inheritdoc
@@ -27,6 +29,21 @@ class GalleryCategory extends \app\models\BaseActiveRecord
     {
         return '{{%gallery_category}}';
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors() 
+    {
+        return ArrayHelper::merge(parent::behaviors(), [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'slugAttribute' => 'slug',
+                'ensureUnique' => true,
+            ]
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -34,10 +51,10 @@ class GalleryCategory extends \app\models\BaseActiveRecord
     public function rules()
     {
         return [
-            [['name', 'slug', 'order'], 'required'],
+            [['name', 'status','order'], 'required'],
             [['description'], 'string'],
             [['status', 'order', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['slug', 'created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['slug'], 'string', 'max' => 150],
         ];

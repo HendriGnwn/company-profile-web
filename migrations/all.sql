@@ -321,7 +321,7 @@ CREATE TABLE `branch` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `branch` (`id`, `name`, `description`, `address`, `province_id`, `regency_id`, `district_id`, `postal_code`, `address_mapping`, `district_mapping`, `status`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1,	'Kota Tua',	NULL,	'',	'11',	'1101',	'1101010',	1,	'[{\"id\":\"11\",\"cities\":[{\"id\":\"1101\",\"districts\":[\"1101010\"]]}]}]',	'[\"1101010\"]',	1,	NULL,	NULL,	NULL,	NULL);
+(1,	'Head Office Lapan',	'',	'Jl Batu Ceper X No 2Y',	'31',	'3173',	'3173080',	10120,	'[{\"31\":[{\"3173\":[\"3173010\",\"3173020\",\"3173030\",\"3173040\",\"3173050\",\"3173060\",\"3173070\",\"3173080\"]}]}]',	'[\"3173010\",\"3173020\",\"3173030\",\"3173040\",\"3173050\",\"3173060\",\"3173070\",\"3173080\"]',	1,	NULL,	'2018-10-22 11:13:25',	NULL,	1);
 
 DROP TABLE IF EXISTS `branch_mapping_address`;
 CREATE TABLE `branch_mapping_address` (
@@ -419,11 +419,11 @@ INSERT INTO `config` (`id`, `name`, `value`, `label`, `notes`) VALUES
 (10,	'email_subject',	'Company',	NULL,	NULL),
 (11,	'email_admin',	'[\"hendrigunawan195@gmail.com\", \"winatasandi05@gmail.com\"]',	NULL,	NULL),
 (12,	'email_developers',	'hendrigunawan195@gmail.com,winatasandi05@gmail.com',	NULL,	'Pakai comma (,) sebagai pemisah email dan jangan pakai spasi'),
-(13,	'email_noreply',	'no-reply@qelopak.com',	NULL,	NULL),
+(13,	'email_noreply',	'dpp@lapan.co.id',	NULL,	NULL),
 (14,	'email_web_support',	'hendrigunawan195@gmail.com',	NULL,	NULL),
-(15,	'counter_year_of_experience',	'2',	'Year Of Experience',	NULL),
-(16,	'counter_project_completed',	'35',	'Project Completed',	NULL),
-(17,	'counter_happy_customers',	'24',	'Happy Customers',	NULL),
+(15,	'counter_year_of_experience',	'15',	'Year Of Experience',	NULL),
+(16,	'counter_project_completed',	'16',	'Project Completed',	NULL),
+(17,	'counter_happy_customers',	'17',	'Happy Customers',	NULL),
 (18,	'counter_our_employees',	'12',	'Our Employees',	NULL),
 (19,	'titles',	'[\"Mr\",\"Mrs\",\"Ms\"]',	NULL,	NULL),
 (20,	'registration_types',	'{\"training\":\"Training\",\"workshop\":\"Workshop\"}',	NULL,	NULL),
@@ -432,17 +432,23 @@ INSERT INTO `config` (`id`, `name`, `value`, `label`, `notes`) VALUES
 (23,	'app_metadesc',	'Qelopak Teknologi Indonesia is your web solution, web maintenance, Network Development, and network development, training center. We also provide server, vps and domain for your website.',	'Meta Description',	NULL),
 (24,	'app_seo_image_url',	'http://www.qelopak.com/data/img/logo.png',	'Image Url for SEO',	NULL),
 (25,	'app_seo_alt_image',	'Logo design of the Qelopak Teknologi Indonesia',	'Alt Image for SEO',	NULL),
-(26,	'progress_web_analyst',	'87',	'Web Analyst',	NULL),
-(27,	'progress_web_development',	'90',	'Web Development',	NULL),
-(28,	'progress_mobile_hybrid',	'85',	'Mobile Development',	NULL),
-(29,	'progress_network_analyst',	'89',	'Network Analyst',	NULL),
-(30,	'progress_network_development',	'90',	'Network Development',	NULL),
+(26,	'progress_web_analyst',	'26',	'Web Analyst',	NULL),
+(27,	'progress_web_development',	'27',	'Web Development',	NULL),
+(28,	'progress_mobile_hybrid',	'28',	'Mobile Development',	NULL),
+(29,	'progress_network_analyst',	'29',	'Network Analyst',	NULL),
+(30,	'progress_network_development',	'30',	'Network Development',	NULL),
 (31,	'credential_googlemap_api',	'AIzaSyAKeC-2a0_v6Ner-MBhpPSLrAIvBDXToq8',	NULL,	NULL),
 (32,	'map_location_latitude',	'-6.5414552',	NULL,	NULL),
 (33,	'map_location_longitude',	'106.6800606',	NULL,	NULL),
 (34,	'map_marker_description',	'PT Qelopak Teknologi Indonesia, Kp. Wangun Jaya, Rt.002 Rw.007, No, 54, Ciaruteun Ilir, Cibungbulang, Bogor, Jawa Barat 16630',	NULL,	NULL),
 (35,	'app_company_name',	'PT Company Name',	NULL,	NULL),
-(36,	'app_copyright_url',	'http://qelopak.com',	NULL,	NULL);
+(36,	'app_copyright_url',	'http://qelopak.com',	NULL,	NULL),
+(37,	'app_logo',	'uploads/logo.jpg',	NULL,	NULL),
+(38,	'app_favicon',	'favicon.ico',	NULL,	NULL),
+(39,	'app_color_primary',	'#ad2e2e',	NULL,	NULL),
+(40,	'app_color_secondary',	'#eaeaea',	NULL,	NULL),
+(41,	'app_color_footer_content',	'#3c78d8',	NULL,	NULL),
+(42,	'app_color_footer_copyright',	'#1c4587',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `contact`;
 CREATE TABLE `contact` (
@@ -7786,7 +7792,9 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `member` (`id`, `member_code`, `first_name`, `last_name`, `email`, `password`, `phone`, `id_card_number`, `id_card_photo`, `photo`, `address`, `province_id`, `regency_id`, `district_id`, `postal_code`, `branch_id`, `status`, `confirmed_at`, `confirmed_by`, `blocked_at`, `blocked_reason`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(6,	'123123123',	'Hendri',	'Gunawan',	'hendri.gnw@gmail.com',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'',	NULL,	NULL,	NULL,	'',	'11',	'1101',	'1101010',	1,	1,	1,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL);
+(6,	'123123123',	'Hendri',	'Gunawan',	'hendri.gnw@gmail.com',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'',	NULL,	NULL,	NULL,	'',	'11',	'1101',	'1101010',	1,	1,	1,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL),
+(7,	'48327290000001',	'Hendri',	'Gunawan',	'admin@gmail.com',	'$2y$13$YdY95fP75F.WlSFG/KMhfekYrkZQE7fL2RQbS0lvmauT03Lcv5T1S',	'08561471500',	'83272934817231',	'hendri-cz0-edcto4dxgixiv9jm.png',	'hendri-fvorsytzeepbkiaxsp40.png',	'Jl Batu Ceper X No 2Y567',	'31',	'3173',	'3173030',	10120,	1,	5,	NULL,	NULL,	NULL,	NULL,	'2018-10-22 02:20:15',	'2018-10-22 04:31:18',	NULL,	NULL),
+(8,	'28327290000001',	'Hendri123',	'Gunawan',	'hendri.gnw123@gmail.com',	'asdmin123',	'08561471500',	'83272934817231',	'hendri123-dq6azcupnqa2ovrakg2.png',	'hendri123-pfim61o9giokeexsotms.png',	'Jl Batu Ceper X No 2Y',	'16',	'1602',	'1602011',	10120,	1,	1,	'2018-10-22 10:56:36',	1,	NULL,	'',	'2018-10-22 10:43:07',	'2018-10-22 10:56:36',	1,	1);
 
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
@@ -7840,7 +7848,8 @@ INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`, `is_absolute_url`, `option
 (37,	NULL,	'Rekening',	'/page/rekening',	0,	'',	1,	1,	25,	'2018-10-19 14:22:37',	'2018-10-20 07:20:16',	1,	1),
 (38,	12,	'Gallery Category',	'/administrator/gallery-category',	0,	'',	10,	1,	21,	'2018-10-20 04:40:39',	'2018-10-20 04:41:22',	1,	1),
 (39,	NULL,	'Membership',	'/administrator/member',	0,	'return [\'icon\'=>\'users\'];',	10,	1,	20,	'2018-10-20 04:42:21',	NULL,	1,	1),
-(40,	NULL,	'Website Information',	'/administrator/website-information',	0,	'return [\'icon\'=>\'laptop\'];',	10,	1,	25,	'2018-10-20 04:43:08',	NULL,	1,	1);
+(40,	NULL,	'Website Information',	'/administrator/website-information',	0,	'return [\'icon\'=>\'laptop\'];',	10,	1,	25,	'2018-10-20 04:43:08',	NULL,	1,	1),
+(41,	NULL,	'Kantor Cabang',	'branch/index',	0,	'return [\'icon\' => \'building-o\'];',	10,	1,	10,	'2018-10-22 15:54:19',	'2018-10-22 15:57:59',	1,	1);
 
 DROP TABLE IF EXISTS `migration`;
 CREATE TABLE `migration` (
@@ -8662,7 +8671,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user` (`id`, `email`, `username`, `password_hash`, `auth_key`, `status`, `last_login`, `join_at`, `blocked_at`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1,	'hendri.gnw@gmail.com',	'hendri.gn',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'e-hE7QPrZsBDkH0EgxA-VYIwGab1cRWt',	1,	'2018-10-21 07:20:07',	'2017-02-16 11:53:05',	NULL,	'2017-02-16 11:53:05',	NULL,	NULL,	NULL),
+(1,	'hendri.gnw@gmail.com',	'hendri.gn',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'e-hE7QPrZsBDkH0EgxA-VYIwGab1cRWt',	1,	'2018-10-22 18:20:48',	'2017-02-16 11:53:05',	NULL,	'2017-02-16 11:53:05',	NULL,	NULL,	NULL),
 (2,	'winatasandi05@gmail.com',	'sandi.winata',	'$2y$13$omEO0lonUBSnTuCG/gvlWuk/UzZbBoiioPvFT/kt7p/mjpHudz8Sa',	'ht_LttpGZ7h0N8Jqm_nLOLrZswjTzEFm',	1,	'2018-10-07 00:15:14',	'2017-02-16 11:53:06',	NULL,	'2017-02-16 11:53:06',	NULL,	NULL,	NULL),
 (3,	'hello@atc.co.id',	'atc.indonesia',	'$2y$13$iZZUL9cy4Yu1hqKKlHUUauE4kvGT0mbNUdhGipOVeEMLGCu/OUw5.',	'moyUNlSERjnesQ-xs_kru_qc7PFX6JLP',	1,	'2018-08-17 04:25:53',	'2017-04-16 22:48:37',	NULL,	'2017-04-16 22:48:37',	'2017-07-30 23:23:20',	2,	2),
 (4,	'muhamadfuady22@gmail.com',	'amin.fuady',	'$2y$13$1hnHd5CXirfuIAfooF7SFemjROo19kWdmteTqFpSMIr7ywMjKWmNW',	'XaJfbXJU8MCRIF_nf_KqO6AUkg60HGaV',	1,	'2018-10-07 00:16:21',	'2018-09-28 03:36:44',	NULL,	'2018-09-28 03:36:43',	'2018-10-07 00:16:04',	2,	2),
@@ -83650,4 +83659,4 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('9107180011',	'9107180',	'KLAIN'),
 ('9107180012',	'9107180',	'SAMUSA');
 
--- 2018-10-22 03:43:02
+-- 2018-10-22 18:53:52

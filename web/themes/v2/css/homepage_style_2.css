@@ -1381,7 +1381,7 @@ ul{
 	width: 90px !important;
     height: 90px !important;
     padding-left: 18px;
-	background:#4285f4 !important;
+	background:#4285f4;
     border: 1px solid #4285f4;
     padding-top: 20px;
 	border-left:0;
@@ -1390,7 +1390,7 @@ ul{
 	width: 90px !important;
     height: 90px !important;
     padding-left: 18px;
-	background:#4285f4 !important;
+	background:#4285f4;
     border: 1px solid #4285f4;
     padding-top: 20px;
 	border-right:0;
