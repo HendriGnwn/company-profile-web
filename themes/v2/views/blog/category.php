@@ -12,8 +12,7 @@ use yii\widgets\LinkPager;
 /* @var $blogCategory BlogCategory */
 
 $this->title = $blogCategory->name;
-$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' =>['/blog/index']];
-$this->params['breadcrumbs'][] = Yii::t('app.label', 'Category');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app.label', 'News'), 'url' =>['/blog/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $description = $blogCategory->metadesc;
@@ -35,83 +34,104 @@ $socialMedia = [
     'description' => $description,
 ];
 $this->registerMetaSocialMedia($socialMedia);
+$this->registerCssFile('/themes/v2/css/blog_style_6.css');
+$this->registerCss("
+.grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(333px,1fr));
+  grid-auto-rows: 20px;
+}
+");
+$this->registerJs("
+function resizeGridItem(item){
+  grid = document.getElementsByClassName('grid')[0];
+  rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+  rowSpan = Math.ceil((item.querySelector('.blog-post-wrapper').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+    item.style.gridRowEnd = 'span '+rowSpan;
+}
+
+function resizeAllGridItems(){
+  allItems = document.getElementsByClassName('item');
+  for(x=0;x<allItems.length;x++){
+    resizeGridItem(allItems[x]);
+  }
+}
+
+function resizeInstance(instance){
+	item = instance.elements[0];
+  resizeGridItem(item);
+}
+
+window.onload = resizeAllGridItems();
+window.addEventListener('resize', resizeAllGridItems);
+
+allItems = document.getElementsByClassName('item');
+for(x=0;x<allItems.length;x++){
+  imagesLoaded( allItems[x], resizeInstance);
+}   
+");
 
 ?>
-<section class="section-padding grid-news-hover grid-blog">
+<div class="blog_section">
     <div class="container">
         
         <?php if (empty($blogPosts)) { ?>
-        <div class="alert alert-box info-box col-xs-12" role="alert">
-
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-            <div class="icon-wrap">
-                <i class="fa fa-check-circle-o"></i>
-            </div><!-- /.icon-wrap -->
-
-            <div class="info-wrap">
-                <strong>Info Message: Blog is empty</strong>
-                <span>Please subscribe us for get the blog updates</span>
-            </div><!-- /.info-wrap -->
+        <div class="alert fade_info fade">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <strong><?= Yii::t('app', 'Information: Blog is empty') ?></strong>
         </div>
         
         <?php } else { ?>
 
-        <div class="row">
-            <div id="blogGrid">
-                
-                <?php foreach ($blogPosts as $post) : ?>
-                <div class="col-xs-12 col-sm-6 col-md-4 blog-grid-item">
-                    <article class="post-wrapper">
+        <div class="grid">
+            <?php foreach ($blogPosts as $post) : ?>
+            <div class="item blog">
+                <article class="blog-post-wrapper clearfix">
+                    <div class="post-thumbnail">
+                        <?= $post->getPhotoImg() ?>
 
-                        <div class="thumb-wrapper waves-effect waves-block waves-light">
-                            <?= Html::a(
-                                    Html::img($post->getPhotoUrl(), [
-                                        'alt' => $post->title,
-                                        'class' => 'img-responsive',
-                                    ]),
-                                    $post->getDetailUrl(),
-                                    []
-                                ) ?>
-                            <div class="post-date">
-                                <?= FormatConverter::dateFormat($post->post_date, 'd') ?><span><?= FormatConverter::dateFormat($post->post_date, 'M') ?></span>
+                        <div class="posted-date">
+                            <span class="day"><?= FormatConverter::dateFormat($post->post_date, 'd') ?></span>
+                            <span class="month"><?= FormatConverter::dateFormat($post->post_date, 'M') ?></span>
+                        </div>
+                    </div>
+                    <!-- /.post-thumbnail -->
+
+                    <div class="blog-content">
+                        <header class="entry-header">
+                            <h4 class="entry-title">
+                                <?= Html::a($post->title, $post->getDetailUrl()) ?>
+                            </h4>
+                            <div class="entry-meta">
+                                <ul>
+                                    <li><span class="author"><?= Yii::t('app', 'By') ?> <a href="#"><?= $post->createdBy ? $post->createdBy->username : 'Anonymous' ?></a></span>
+                                    </li>
+                                    <li><span class="posted-in"><?= Yii::t('app', 'In') ?> <a href="#"><?= Html::a($post->blogCategory->name, $post->blogCategory->getUrl()) ?></a></span>
+                                    </li>
+                                </ul>
                             </div>
-                        </div><!-- .post-thumb -->
+                            <!-- /.entry-meta -->
+                        </header>
+                        <!-- /.entry-header -->
 
-                        <div class="blog-content">
+                        <div class="entry-content">
+                            <p><?= $post->lead_text ?></p>
+                        </div>
+                        <!-- /.entry-content -->
+                    </div>
+                    <!-- /.blog-content -->
 
-                            <div class="hover-overlay light-blue"></div>
-
-                            <header class="entry-header-wrapper">
-                                <div class="entry-header">
-                                    <h2 class="entry-title">
-                                        <?= Html::a($post->title, $post->getDetailUrl()) ?>
-                                    </h2>
-
-                                    <div class="entry-meta">
-                                        <ul class="list-inline">
-                                            <li>
-                                                By <a href="#"><?= $post->createdBy ? $post->createdBy->username : 'Anonymous' ?></a>
-                                            </li>
-                                            <li>
-                                                In <?= Html::a($post->blogCategory->name, $post->blogCategory->getUrl()) ?>
-                                            </li>
-                                        </ul>
-                                    </div><!-- .entry-meta -->
-                                </div><!-- /.entry-header -->
-                            </header><!-- /.entry-header-wrapper -->
-
-                            <div class="entry-content">
-                                <p><?= $post->lead_text ?></p>
-                            </div><!-- .entry-content -->
-
-                        </div><!-- /.blog-content -->
-
-                    </article><!-- /.post-wrapper -->
-                </div><!-- /.col-md-4 -->
-                <?php endforeach; ?>
-
-            </div><!-- /#blogGrid -->
+                    <div class="entry-footer clearfix">
+                        <ul class="entry-meta pull-left">
+                        </ul>
+                        <?= Html::a('<i class="fa fa-long-arrow-right"></i> More', $post->getDetailUrl(), ['class' => 'readmore pull-right']) ?>
+                    </div>
+                    <!-- /.entry-footer -->
+                </article>
+            </div>
+            <?php endforeach; ?>
         </div><!-- /.row -->
         
         <?php } ?>
@@ -130,5 +150,4 @@ $this->registerMetaSocialMedia($socialMedia);
 
 
     </div><!-- /.container -->
-</section>
-<!-- Grid News End -->
+</div>

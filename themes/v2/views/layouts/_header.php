@@ -15,7 +15,7 @@ use app\models\Config;
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                     <div class="contact_info_wrapper">
                         <ul>
-                            <li><a href="#"><i class="fa fa-envelope"></i> <?= Config::getAppContactEmail() ?></a></li>
+                            <li><a href="mailto:<?= Config::getAppContactEmail() ?>"><i class="fa fa-envelope"></i> <?= Config::getAppContactEmail() ?></a></li>
                             <li class="contact_number_wrapper hidden-xs"><a href="tel:<?= Config::getAppContactPhone() ?>"><i class="fa fa-phone"></i> <?= Config::getAppContactPhone() ?></a></li>
                         </ul>
                     </div>
@@ -49,46 +49,7 @@ use app\models\Config;
                                 ]) ?>
                             </li>
                             <!-- Cart Option -->
-                            <li class="dropdown signin_wrapper">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-sign-in"></i> Login / Register
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="signin_dropdown">
-                                        <div class="sign_up_message">
-                                            <div class="section_heading">
-                                                <h3><?= Yii::t('app', 'Login for Membership') ?></h3><br/>
-                                                <span class="bordered-icon"><i class="fa fa-square"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="formsix-pos">
-                                            <div class="form-group i-email">
-                                                <input type="email" class="form-control" required="" id="emailTen" placeholder="Email Address *">
-                                            </div>
-                                        </div>
-                                        <div class="formsix-e">
-                                            <div class="form-group i-password">
-                                                <input type="password" class="form-control" required="" id="namTen-first" placeholder="Password *">
-                                            </div>
-                                        </div>
-                                        <div class="remember_box">
-                                            <label class="control control--checkbox">Remember me
-                                                <input type="checkbox">
-                                                <span class="control__indicator"></span>
-                                            </label>
-                                            <a href="#" class="forget_password">
-                                                Forgot Password
-                                            </a>
-                                        </div>
-                                        <div class="login_wrapper">
-                                            <a href="#" class="btn btn-primary login_btn"> Login </a>
-                                        </div>
-                                        <div class="sign_up_message">
-                                            <p>Don’t have an account ? <a href="#"> Sign up </a> </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <?= app\widgets\MemberSigninWidget::widget() ?>
                             <!-- /.Cart Option -->
                         </ul>
                     </div>
@@ -130,7 +91,14 @@ use app\models\Config;
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
-                        <a class="navbar-brand" href="index-2.html"><img src="images/logo.png" alt=""></a>
+                        <?= Html::a(
+                            //Html::img('https://via.placeholder.com/150x35/4285f4/555555?text=LOGO 150x25', ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark']),
+                            Html::img(['data/img/logo.jpg'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark', 'width' => 50]),
+                            ['/site/index'], 
+                            [
+                                'class' =>'navbar-brand',
+                            ]
+                        ) ?>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                         <button type="button" class="navbar-toggle collapsed" aria-expanded="false">
@@ -145,11 +113,11 @@ use app\models\Config;
         </div>
         <div id="sidebar">
             <?= Html::a(
-                Html::img(['data/img/logo.png'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark']) .
-                Html::img(['data/img/logo-white.png'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-light']),
+                //Html::img('https://via.placeholder.com/150x35/4285f4/555555?text=LOGO 150x25', ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark']),
+                Html::img(['data/img/logo.jpg'], ['alt'=>'Logo ' . Yii::$app->name, 'class'=>'logo-dark', 'width' => 50]),
                 ['/site/index'], 
                 [
-                    'class' =>'sidebar_logo',
+                    'class' =>'navbar-brand',
                 ]
             ) ?>
             <div id="toggle_close">&times;</div>

@@ -7,12 +7,13 @@ use app\models\Client;
 use app\models\Contact;
 use app\models\ContactForm;
 use app\models\Page;
-use app\models\search\PortfolioSearch;
+use app\models\search\GallerySearch;
 use app\models\Subscribe;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\Response;
+use const YII_ENV_TEST;
 
 class SiteController extends Controller
 {
@@ -42,7 +43,7 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => \YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -68,9 +69,9 @@ class SiteController extends Controller
             return $this->refresh('#subscribe-form');
         }
         
-        $portfolioSearch = new PortfolioSearch();
-        $portfolioProvider = $portfolioSearch->search(Yii::$app->request->queryParams);
-        $portfolioProvider->setPagination(['pageSize'=>3]);
+        $searchModel = new GallerySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(['pageSize' => 3]); //debug
                 
         $shortService = Page::findOne(['id' => Page::PAGE_SERVICE_PARTIAL, 'status' => Page::STATUS_ACTIVE]);
         
@@ -78,7 +79,7 @@ class SiteController extends Controller
             'contactModel' => $contactModel,
             'shortService' => $shortService,
             'subscribeForm' => $subscribe,
-            'portfolioProvider' => $portfolioProvider,
+            'portfolioProvider' => $dataProvider,
         ]);
     }
 

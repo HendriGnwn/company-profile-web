@@ -5,7 +5,7 @@ use app\widgets\BannerWidget;
 use app\widgets\BlogSectionWidget;
 use app\widgets\ContactUsWidget;
 use app\widgets\GoogleMapWidget;
-use app\widgets\PortfolioWidget;
+use app\widgets\GalleryWidget;
 use app\widgets\ShortServiceWidget;
 use app\widgets\SubscribeFormWidget;
 use app\widgets\TestimonialWidget;
@@ -90,7 +90,7 @@ $this->registerMetaSocialMedia($socialMedia);
         <!-- /.container -->
     </div>
 
-    <?= PortfolioWidget::widget(['portfolios' => $portfolioProvider]) ?>
+    <?= GalleryWidget::widget(['galleries' => $portfolioProvider]) ?>
 
     <?= TestimonialWidget::widget() ?>
 

@@ -8,7 +8,7 @@
 
 namespace app\widgets;
 
-use app\models\Service;
+use app\models\GalleryCategory;
 use yii\base\Widget;
 
 /**
@@ -16,15 +16,15 @@ use yii\base\Widget;
  *
  * @author Hendri <hendri.gnw@gmail.com>
  */
-class PortfolioWidget extends Widget
+class GalleryWidget extends Widget
 {
-    public $portfolios;
+    public $galleries;
     
     public function run()
     {
-        return $this->render('portfolio', [
-            'portfolios' => $this->portfolios,
-            'services' => $this->getMenuServices(),
+        return $this->render('gallery', [
+            'galleries' => $this->galleries,
+            'categories' => $this->getCategories(),
         ]);
     }
     
@@ -33,8 +33,8 @@ class PortfolioWidget extends Widget
      * 
      * @return array
      */
-    protected function getMenuServices()
+    protected function getCategories()
     {
-        return Service::find()->actived()->all();
+        return GalleryCategory::find()->actived()->ordered()->all();
     }
 }

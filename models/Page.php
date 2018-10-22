@@ -95,8 +95,8 @@ class Page extends BaseActiveRecord
     public static function categoryLabels() 
     {
         return [
-            self::CATEGORY_FULL => Yii::t('app', 'Full'),
-            self::CATEGORY_PARTIAL => Yii::t('app', 'Partial'),
+            self::CATEGORY_FULL => Yii::t('app', 'Full Page'),
+            self::CATEGORY_PARTIAL => Yii::t('app', 'Partial Page'),
         ];
     }
 

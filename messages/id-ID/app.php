@@ -7,5 +7,10 @@
  */
 
 return [
-    'What We Do' => 'Apa yang kita lakukan'
+    'Front Page' => 'Halaman Depan',
+    'Back Page' => 'Halaman Admin',
+    'Front Footer' => 'Depan bagian Bawah',
+    
+    'What We Do' => 'Apa yang kita lakukan',
+    'Our Galleries' => 'Galeri Kami',
 ];

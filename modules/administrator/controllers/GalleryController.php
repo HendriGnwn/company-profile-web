@@ -85,6 +85,7 @@ class GalleryController extends BaseController
                 ];         
             }else if($model->load($request->post())){
 				$model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+                $model->gallery_category = implode(',', $model->gallery_category);
                 if ($model->save()) {
 					return [
 						'forceReload' => '#crud-datatable-pjax',
@@ -150,6 +151,7 @@ class GalleryController extends BaseController
                 ];         
             }else if($model->load($request->post())){
 				$model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+                $model->gallery_category = implode(',', $model->gallery_category);
                 if ($model->save()) {
 					return [
 						'forceReload' => '#crud-datatable-pjax',

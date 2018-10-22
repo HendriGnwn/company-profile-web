@@ -26,7 +26,13 @@ class BlogSidebarWidget extends Widget
             'latestBlogs' => $this->getLatestBlogs(),
             'blogCategories' => $this->getBlogCategories(),
             'model' => $this->model,
+            'tags' => $this->getTags(),
         ]);
+    }
+    
+    public function getTags()
+    {
+        return \app\models\BlogPostTag::find()->groupBy('blog_tag_id')->limit(15)->all();
     }
     
     /**

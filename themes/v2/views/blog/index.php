@@ -32,7 +32,7 @@ $socialMedia = [
     'description' => $description,
 ];
 $this->registerMetaSocialMedia($socialMedia);
-$this->registerCssFile('themes/v2/css/blog_style_6.css');
+$this->registerCssFile('/themes/v2/css/blog_style_6.css');
 $this->registerCss("
 .grid {
   display: grid;

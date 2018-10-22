@@ -191,6 +191,11 @@ class Config extends \yii\db\ActiveRecord
         return self::getValueByName('app_copyright');
     }
     
+    public static function getAppCopyrightUrl()
+    {
+        return self::getValueByName('app_copyright_url');
+    }
+    
     /**
      * return app contact address
      * 

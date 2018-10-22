@@ -70,7 +70,7 @@ class Menu extends BaseActiveRecord
             'parent_id' => Yii::t('app', 'Parent ID'),
             'name' => Yii::t('app', 'Name'),
             'url' => Yii::t('app', 'Url'),
-            'is_absolute_url' => Yii::t('app', 'Is Absolute Url'),
+            'is_absolute_url' => Yii::t('app', 'Full Url'),
             'category' => Yii::t('app', 'Category'),
             'option' => Yii::t('app', 'Option'),
             'status' => Yii::t('app', 'Status'),
@@ -192,9 +192,9 @@ class Menu extends BaseActiveRecord
     public static function categoryLabels() 
     {
         return [
-            self::CATEGORY_MAIN => Yii::t('app', 'Main'),
-            self::CATEGORY_MAIN_FOOTER => Yii::t('app', 'Main Footer'),
-            self::CATEGORY_BACKEND => Yii::t('app', 'Backend'),
+            self::CATEGORY_MAIN => Yii::t('app', 'Front Page'),
+            self::CATEGORY_MAIN_FOOTER => Yii::t('app', 'Front Footer'),
+            self::CATEGORY_BACKEND => Yii::t('app', 'Admin Page'),
         ];
     }
 

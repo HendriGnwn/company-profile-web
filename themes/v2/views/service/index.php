@@ -11,7 +11,7 @@ use yii\helpers\Html;
 
 /* @var $services Service */
 
-$this->title = 'Our Services';
+$this->title = $pageService->name;
 $this->params['breadcrumbs'][] = $this->title;
 
 $metakey = $pageService->metakey;

@@ -13,7 +13,6 @@ use yii\helpers\Url;
 
 $this->title = $postDetail->title;
 $this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' =>['/blog/index']];
-$this->params['breadcrumbs'][] = 'Detail';
 $this->params['breadcrumbs'][] = $this->title;
 
 $description = $postDetail->metadesc;
@@ -41,100 +40,82 @@ $createdBy = $postDetail->createdBy;
 $imgAuthor = $createdBy->userProfile->getPhotoUrl() ? $createdBy->userProfile->getPhotoUrl() : ['data/img/working-man.png'];
 
 ?>
-<!-- blog section start -->
-<section class="blog-section section-padding">
+<div class="blog_section">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
-                <div class="posts-content single-post">
-
-                    <article class="post-wrapper">
-
-                        <header class="entry-header-wrapper clearfix">
-
-                            <div class="author-thumb waves-effect waves-light">
-                                <?= Html::a(
-                                    Html::img($imgAuthor, ['alt'=>$createdBy->getName()]),
-                                    '#'
-                                ) ?>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                <article class="blog-post-wrapper clearfix">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="post-thumbnail">
+                                <?= Html::img($postDetail->getPhotoUrl(), [
+                                    'alt' => $postDetail->title,
+                                    'class' => 'img-responsive',
+                                ]) ?>
                             </div>
+                            <!-- /.post-thumbnail -->
 
-                            <div class="entry-header">
-                                <h2 class="entry-title"><?= $postDetail->title ?></h2>
+                            <div class="blog-content">
+                                <header class="entry-header">
+                                    <h4 class="entry-title"><a href="#"><?= $postDetail->title ?></a></h4>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li><span class="author">By <a href="#"><?= $createdBy->getName() ?></a></span>
+                                            </li>
+                                            <li><span class="posted-date"><a href="#"><?= $createdBy->getName() ?></a></span>
+                                            </li>
+                                            <li><span class="posted-in">In <a href="#">Web Design</a></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.entry-meta -->
+                                </header>
+                                <!-- /.entry-header -->
 
-                                <div class="entry-meta">
-                                    <ul class="list-inline">
-                                        <li>
-                                            <i class="fa fa-user"></i><?= $createdBy->getName() ?>
-                                        </li>
+                                <div class="entry-content">
+                                    <?= $postDetail->content ?>
+                                </div>
+                                <!-- /.entry-content -->
 
-                                        <li>
-                                            <i class="fa fa-clock-o"></i><?= FormatConverter::dateFormat($postDetail->post_date, 'M d, Y H:i A') ?>
-                                        </li>
-
-                                        <li>
-                                            <i class="fa fa-heart-o"></i><a href="#"><span>1</span></a>
-                                        </li>
-
-                                        <li>
-                                            <i class="fa fa-comment-o"></i><a href="#">3</a>
-                                        </li>
-                                    </ul>
-                                </div><!-- .entry-meta -->
                             </div>
+                            <!-- /.blog-content -->
+                        </div>
+                     </div>
+                </article>
 
-                        </header><!-- /.entry-header-wrapper -->
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">	
+                    <div class="blog_post_bottom_wrapper">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="tags">
+                                        <i class="fa fa-tags" aria-hidden="true"></i> 
+                                        Tags:
+                                        <?php 
+                                        foreach ($postDetail->blogPostTags as $tag) {
+                                            echo Html::a($tag->blogTag->name, $tag->blogTag->getUrl());
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+                                    <div class="share_icons">
+                                        Share:
+                                        <a href="javascript:void(0);" onclick="CenterWindow(1000,800,50,'https://www.facebook.com/sharer/sharer.php?u=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-facebook"></i></a>
+                                        <a href="javascript:void(0);" onclick="CenterWindow(1000,800,50,'https://twitter.com/intent/tweet?url=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-twitter"></i></a>
+                                        <a href="javascript:void(0);" onclick="CenterWindow(1000,800,50,'https://plus.google.com/share?url=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-google" aria-hidden="true"></i> </a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
 
-                        <div class="thumb-wrapper">
-                            <?= Html::img($postDetail->getPhotoUrl(), [
-                                        'alt' => $postDetail->title,
-                                        'class' => 'img-responsive',
-                                    ]) ?>
-                        </div><!-- .post-thumb -->
-
-
-                        <div class="entry-content">
-                            <?= $postDetail->content ?>
-                        </div><!-- .entry-content -->
-
-
-                        <footer class="entry-footer">
-                            <div class="post-tags">
-                                <span class="tags-links">
-                                    <i class="fa fa-tags"></i>
-                                    <?php 
-                                    foreach ($postDetail->blogPostTags as $tag) {
-                                        echo Html::a($tag->blogTag->name, $tag->blogTag->getUrl());
-                                    }
-                                    ?>
-                                </span>
-                            </div> <!-- .post-tags -->
-
-                            <ul class="list-inline right share-post">
-                                <li><a href="javascript:void(0)" onclick="CenterWindow(1000,800,50,'https://www.facebook.com/sharer/sharer.php?u=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-facebook"></i> <span>Share</span></a>
-                                </li>
-                                <li><a href="javascript:void(0)" onclick="CenterWindow(1000,800,50,'https://twitter.com/intent/tweet?url=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-twitter"></i> <span>Tweet</span></a>
-                                </li>
-                                <li><a href="javascript:void(0)" onclick="CenterWindow(1000,800,50,'https://plus.google.com/share?url=<?= $postDetail->getDetailUrl(true) ?>','demo_win');"><i class="fa fa-google-plus"></i> <span>Plus</span></a>
-                                </li>
-                            </ul>
-                        </footer>
-
-                    </article><!-- /.post-wrapper -->
-
-                    <?= Disqus::widget(['settings'=>['title'=>$postDetail->title, 'identifier'=>$postDetail->slug, 'url'=>$postDetail->getDetailUrl(true)]]) ?>
-
-                </div><!-- /.posts-content -->
-            </div><!-- /.col-md-8 -->
-
-            <div class="col-md-4">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
                 <?= BlogSidebarWidget::widget(['model' => $postDetail]) ?>
-            </div><!-- /.col-md-4 -->
-
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section>
-<!-- blog section end -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 $this->registerJs("

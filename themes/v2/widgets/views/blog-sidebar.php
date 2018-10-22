@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\FormatConverter;
 use app\models\BlogPost;
 use app\models\User;
 use yii\helpers\Html;
@@ -20,136 +21,55 @@ $imgBackgroundAuthor = $createdBy->userProfile->getPhotoBackgroundUrl() ? $creat
  * and open the template in the editor.
  */
 ?>
-<div class="tt-sidebar-wrapper" role="complementary">
-    <div class="widget widget_search">
-        <?= Html::beginForm(['/blog/search'], 'get', ['class'=>'search-form']) ?>
-        <?= Html::input('text', 'query', null, ['placeholder'=>'Write any keywords', 'class'=>'form-control']) ?>
-        <?= Html::submitButton('<i class=\'fa fa-search\'></i>') ?>
-        <?= Html::endForm() ?>
-    </div><!-- /.widget_search -->
-
-
-    <div class="widget widget_tt_author_widget">
-
-        <div class="author-info-wrapper">
-
-            <div class="author-cover">
-                <?= Html::img($imgBackgroundAuthor, ['alt'=>$createdBy->getName()]) ?>
-            </div>
-
-            <div class="author-avatar">
-                <?= Html::img($imgAuthor, ['alt'=>$createdBy->getName()]) ?>
-
-                <h2><?= $createdBy->getName() ?></h2>
-                <span><?= $createdBy->userProfile->proffesional ?></span>
-            </div>
-
-            <p><?= $createdBy->userProfile->bio ?></p>
-
-            <div class="author-social-links">
-                <ul class="list-inline">
-                    <?php
-                    $facebook = $createdBy->userProfile->social_facebook ? $createdBy->userProfile->social_facebook : '#';
-                    $twitter = $createdBy->userProfile->social_twitter ? $createdBy->userProfile->social_twitter : '#';
-                    $linkedIn = $createdBy->userProfile->social_linked_in ? $createdBy->userProfile->social_linked_in : '#';
-                    $dribbble = $createdBy->userProfile->social_dribbble ? $createdBy->userProfile->social_dribbble : '#';
-                    $email = $createdBy->userProfile->social_email ? 'mailto:'.$createdBy->userProfile->social_email : '#';
-                    ?>
-                    <li><?= Html::a('<i class=\'fa fa-facebook\'></i>', $facebook, ['target' => '_blank']) ?></li>
-                    <li><?= Html::a('<i class=\'fa fa-twitter\'></i>', $twitter, ['target' => '_blank']) ?></li>
-                    <li><?= Html::a('<i class=\'fa fa-linkedin\'></i>', $linkedIn, ['target' => '_blank']) ?></li>
-                    <li><?= Html::a('<i class=\'fa fa-dribbble\'></i>', $dribbble, ['target' => '_blank']) ?></li>
-                    <li><?= Html::a('<i class=\'fa fa-envelope-o\'></i>', $email, ['target' => '_blank']) ?></li>
-                </ul>
-            </div>
-        </div> <!-- /author-info-wrapper -->
-    </div><!-- /.widget_tt_author_widget -->
-
-
-    <div  class="widget widget_tt_popular_post">
-        <div class="tt-popular-post border-bottom-tab">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#tt-popular-post-tab1" data-toggle="tab" aria-expanded="true">Latest</a>
-                </li>
-                <li class="">
-                    <a href="#tt-popular-post-tab2" data-toggle="tab" aria-expanded="false">Popular</a>
-                </li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- latest post tab -->
-                <div id="tt-popular-post-tab1" class="tab-pane fade active in">
-                    
-                    <?php foreach ($latestBlogs as $blog) : ?>
-                        <div class="media">
-                            <?= Html::a(
-                                Html::img($blog->getPhotoUrl(), ['alt' => $blog->title]),
-                                $blog->getDetailUrl(),
-                                [
-                                    'class' => 'media-left'
-                                ]
-                            ) ?>
-                            <div class="media-body">
-                                <h4><a href="#"><?= $blog->title ?></a></h4>
-                            </div> <!-- /.media-body -->
-                        </div> <!-- /.media -->
-                    <?php endforeach; ?>
-
-                </div>
-
-                <!-- popular post tab-->
-                <div id="tt-popular-post-tab2" class="tab-pane fade">
-
-                    <?php foreach ($latestBlogs as $blog) : ?>
-                        <div class="media">
-                            <?= Html::a(
-                                Html::img($blog->getPhotoUrl(), ['alt' => $blog->title]),
-                                $blog->getDetailUrl(),
-                                [
-                                    'class' => 'media-left'
-                                ]
-                            ) ?>
-                            <div class="media-body">
-                                <h4><a href="#"><?= $blog->title ?></a></h4>
-                            </div> <!-- /.media-body -->
-                        </div> <!-- /.media -->
-                    <?php endforeach; ?>
-
-                </div>
-            </div><!-- /.tab-content -->
-        </div><!-- /.tt-popular-post -->
-    </div><!-- /.widget_tt_popular_post -->
-
-
-    <div class="widget widget_categories">
-        <h3 class="widget-title">Categories</h3>
+<div class="sidebar_widget">
+    <h4>Search Feed</h4>
+    <?= Html::beginForm(['/blog/search'], 'get', ['class'=>'search_form']) ?>
+    <?= Html::input('text', 'query', null, ['placeholder'=>'Write any keywords', 'class'=>'form-control']) ?>
+    <?= Html::submitButton('<i class=\'fa fa-search\'></i>') ?>
+    <?= Html::endForm() ?>
+</div>
+<div class="sidebar_widget">
+    <h4>Categories</h4>
+    <div class="archives_wrapper">
         <?= Menu::widget([
             'items' => $blogCategories,
+            'linkTemplate' => '<a href="{url}">{label}</a>',
         ]) ?>
-    </div><!-- /.widget_categories -->
-
-
-    <div class="widget widget_tt_twitter">
-        <i class="fa fa-twitter"></i>
-        <div id="twitter-gallery-feed">
-            <div class="twitter-widget"></div> <!-- this div is required for carousel injected by javascript -->
-            <!-- html code injected via javascript -->
-        </div>
-
-    </div><!-- /.widget_tt_twitter -->
-
-
-<!--    <div class="widget widget_tt_instafeed">
-        <i class="fa fa-instagram"></i>
-        <h3 class="widget-title">Instagram Photos</h3>
-
-        <div id="myinstafeed">
-             html code injected via javascript 
-        </div> 
-
-    </div> /.widget_tt_instafeed -->
-
-</div><!-- /.tt-sidebar-wrapper -->
+    </div>
+</div>
+<div class="sidebar_widget">
+    <h4>Latest Post</h4>
+    <div class="latest_post_wrapper">
+        <?php foreach ($latestBlogs as $blog) : ?>
+            <div class="blog_wrapper1">
+                <div class="blog_image">
+                    <?= Html::a(
+                        Html::img($blog->getPhotoUrl(), ['alt' => $blog->title, 'class' => 'img-responsive']),
+                        $blog->getDetailUrl()
+                    ) ?>
+                </div>
+                <div class="blog_text">
+                    <h5>
+                        <?= Html::a(
+                            $blog->title,
+                            $blog->getDetailUrl()
+                        ) ?>
+                    </h5>
+                    <div class="blog_date"><i class="fa fa-calendar-o" aria-hidden="true"></i><?= FormatConverter::dateFormat($blog->post_date, 'M d, Y') ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<div class="sidebar_widget">
+    <h4>Tags Cloud</h4>
+    <div class="tag_cloud_wrapper">
+        <ul>
+            <?php foreach($tags as $tag): ?>
+            <li>
+                <?= Html::a($tag->blogTag->name, $tag->blogTag->getUrl()) ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

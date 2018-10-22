@@ -1,8 +1,9 @@
 <?php
 
 use app\components\View;
+use app\models\Config;
 use app\models\Portfolio;
-use app\widgets\PortfolioWidget;
+use app\widgets\GalleryWidget;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -13,11 +14,11 @@ use app\widgets\PortfolioWidget;
 /* @var $this View */
 /* @var $portfolios Portfolio */
 
-$this->title = 'Our Portfolios';
+$this->title = Yii::t('app', 'Our Galleries');
 $this->params['breadcrumbs'][] = $this->title;
 
-$metakey = 'Our portfolio PT Qelopak Teknologi Indonesia, Web and Network maintenance, renovation and development, Hosting, VPS and Domain';
-$description = 'This is a portfolios of the PT Qelopak Teknologi Indonesia, We are work with great heart';
+$metakey = Config::getAppMetaKey();
+$description = Config::getAppMetaDescription();
 
 /** SEO */
 $this->registerMetaTag([
@@ -38,7 +39,7 @@ $socialMedia = [
 $this->registerMetaSocialMedia($socialMedia);
 
 ?>
-<div class="padding-bottom-100"></div>
-<?= PortfolioWidget::widget([
-    'portfolios' => $portfolios,
+
+<?=GalleryWidget::widget([
+    'galleries' => $models,
 ]) ?>

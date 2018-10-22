@@ -65,9 +65,12 @@ blog_section start
   text-align: center;
 }
 .blog_section .blog-post-wrapper .entry-content p{
-	margin: 0;
-	text-align:left;
-	margin-bottom:20px;
+    margin: 0;
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 2.5em;
+    font-size: 14px;
+    color: #555;
 }
 .blog_section .blog-post-wrapper .entry-content ul li{
 	font-size:16px;

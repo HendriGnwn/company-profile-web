@@ -18,8 +18,8 @@ class GallerySearch extends Gallery
     public function rules()
     {
         return [
-            [['id', 'portfolio_id', 'status', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'photo', 'description', 'metakey', 'metadesc', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'photo', 'description', 'metakey', 'metadesc', 'created_at', 'updated_at', 'gallery_category'], 'safe'],
         ];
     }
 
@@ -62,7 +62,6 @@ class GallerySearch extends Gallery
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'portfolio_id' => $this->portfolio_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
@@ -72,6 +71,7 @@ class GallerySearch extends Gallery
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'photo', $this->photo])
+            ->andFilterWhere(['like', 'gallery_category', $this->gallery_category])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'metakey', $this->metakey])
             ->andFilterWhere(['like', 'metadesc', $this->metadesc]);

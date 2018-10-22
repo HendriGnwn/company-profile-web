@@ -15,6 +15,9 @@ use yii\web\UploadedFile;
  * @property integer $portfolio_id
  * @property string $name
  * @property string $photo
+ * @property string $is_video
+ * @property string $video_url
+ * @property string $gallery_category
  * @property string $description
  * @property string $metakey
  * @property string $metadesc
@@ -61,10 +64,10 @@ class Gallery extends BaseActiveRecord
     public function rules()
     {
         return [
-            [['portfolio_id', 'name', 'description'], 'required'],
+            [['name', 'description', 'gallery_category'], 'required'],
             [['portfolio_id', 'status', 'created_by', 'updated_by'], 'integer'],
             [['description'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'portfolio_id', 'is_video', 'video_url'], 'safe'],
             [['name'], 'string', 'max' => 200],
             [['photo'], 'string', 'max' => 255],
 			[['metakey'], 'string', 'max' => 100],
@@ -93,7 +96,7 @@ class Gallery extends BaseActiveRecord
     {
         @unlink(Yii::getAlias('@app/' . $this->path) . $this->photo);
     }	
-
+    
     /**
      * @inheritdoc
      */
@@ -104,6 +107,8 @@ class Gallery extends BaseActiveRecord
             'portfolio_id' => Yii::t('app', 'Portfolio ID'),
             'name' => Yii::t('app', 'Name'),
             'photo' => Yii::t('app', 'Photo'),
+            'is_video' => Yii::t('app', 'Is Video'),
+            'video_url' => Yii::t('app', 'Video Url Youtube Embed'),
             'description' => Yii::t('app', 'Description'),
             'metakey' => Yii::t('app', 'Metakey'),
             'metadesc' => Yii::t('app', 'Metadesc'),
@@ -121,6 +126,27 @@ class Gallery extends BaseActiveRecord
     public function getPortfolio()
     {
         return $this->hasOne(Portfolio::className(), ['id'=>'portfolio_id']);
+    }
+    
+    public function getGalleryCategories()
+    {
+        return GalleryCategory::find()->where(['in', 'id', $this->gallery_category])->all();
+    }
+    
+    public function getListCategorySlugs($withAll = true)
+    {
+        $result = [];
+        if ($withAll) {
+            $result[] = Yii::t('app', 'All');
+        }
+        if (count($this->getGalleryCategories()) <= 0) {
+            return $result;
+        }
+        foreach ($this->getGalleryCategories() as $model) {
+            $result[] = $model->slug;
+        }
+        
+        return $result;
     }
 	
 	/**
@@ -211,5 +237,12 @@ class Gallery extends BaseActiveRecord
     public function getPath()
     {
         return $this->_path;
+    }
+    
+    public function afterFind() {
+        
+        $this->gallery_category = explode(',', $this->gallery_category);
+        
+        return parent::afterFind();
     }
 }

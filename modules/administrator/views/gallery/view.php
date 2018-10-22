@@ -24,6 +24,7 @@ use yii\widgets\DetailView;
                 'value' => $model->getPhotoUrlHtml(),
                 'format' => 'raw',
             ],
+            'video_url',
             'description:ntext',
 			'metakey',
             'metadesc',

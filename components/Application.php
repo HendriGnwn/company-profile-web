@@ -22,7 +22,7 @@ class Application extends \yii\web\Application
 		parent::init();
 		
 		$this->name = Config::getAppName();
-		
+        
 		return true;
 	}
     

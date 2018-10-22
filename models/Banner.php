@@ -102,7 +102,7 @@ class Banner extends BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'url' => Yii::t('app', 'Url'),
-            'is_absolute_url' => Yii::t('app', 'Is Absolute Url'),
+            'is_absolute_url' => Yii::t('app', 'Full Url'),
             'photo' => Yii::t('app', 'Photo'),
             'category' => Yii::t('app', 'Category'),
             'description' => Yii::t('app', 'Description'),
@@ -164,7 +164,7 @@ class Banner extends BaseActiveRecord
         $path = $this->path . $this->photo;
 
         if (!file_exists(Yii::getAlias('@app/' . $path))) {
-            return null;
+            return 'https://via.placeholder.com/1250x550/555555';
         }
 
         return Url::to('@' . $path, true);

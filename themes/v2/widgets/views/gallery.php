@@ -5,9 +5,9 @@ use kop\y2sp\ScrollPager;
 use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 
-$this->registerCssFile('themes/v2/css/portfolio_masonry_style_1.css');
+$this->registerCssFile('/themes/v2/css/portfolio_masonry_style_1.css');
 
-/* @var $portfolios ActiveDataProvider */
+/* @var $galleries ActiveDataProvider */
 
 ?>
 
@@ -27,13 +27,13 @@ $this->registerCssFile('themes/v2/css/portfolio_masonry_style_1.css');
             <div class="portfolio-filter clearfix text-center">
                 <ul class="list-inline" id="filter">
                     <li><a class="active" data-group="all">All</a></li>
-                    <?php foreach($services as $service) : ?>
-                    <li><a data-group="<?= $service->slug ?>"><?= $service->name ?></a></li>
+                    <?php foreach($categories as $category) : ?>
+                    <li><a data-group="<?= $category->slug ?>"><?= $category->name ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
             <div class="row three-column">
-                <?php if ($portfolios->getCount() == 0) : ?>
+                <?php if ($galleries->getCount() == 0) : ?>
 
                     <div class="alert fade_info .fade">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -44,21 +44,21 @@ $this->registerCssFile('themes/v2/css/portfolio_masonry_style_1.css');
                 <?php else: ?>
 
                     <?= ListView::widget([
-                        'dataProvider' => $portfolios,
+                        'dataProvider' => $galleries,
                         'layout' => '{items}',
                         'options' => [
                             'class' => 'clearfix',
                             'id' => 'gridWrapper'
                         ],
                         'itemOptions' => function ($model, $key, $index, $widget) {
-                            $groups = $model->service ? $model->service->slug : '';
+                            $groups = $model->getListCategorySlugs();
                             return [
                                 'class' => 'col-xs-12 col-sm-6 col-md-6 col-lg-4 portfolio-wrapper',
-                                'data-groups' => '["all", "'.$groups.'"]',
+                                'data-groups' => json_encode($groups),
                                 //'tag' => null,
                             ];
                         },
-                        'itemView' => '_item-portfolio',
+                        'itemView' => '_item-gallery',
                         'pager' => [
                             'class' => ScrollPager::className(),
                             'container' => '.portfolio-container',

@@ -17,63 +17,42 @@ use yii\helpers\Url;
         <div id="rev_slider_1052_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.1">
             <ul>
                 <!-- SLIDE  -->
+                <?php if (count($models) < 0) { ?>
+                    <li data-index="rs-2946" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                        <!-- MAIN IMAGE -->
+                        <img src="https://via.placeholder.com/1250x550/555555" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+
+                        <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">Creative
+                            <br/> Websites
+                        </div>
+
+                        <div class="tp-caption WebProduct-Content-Light   tp-resizeme" id="slide-2946-layer-9" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-30','127','300','270']" data-fontsize="['18','16','16','13']" data-lineheight="['27','27','22','22']" data-width="['448','356','334','277']" data-height="['none','none','76','68']" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1500,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 13; min-width: 448px; max-width: 448px; white-space: normal;">
+                            We have a number of different teams within our agency that specialise in different areas of business so you that receive a generic service.
+                        </div>
+
+                        <div class="tp-caption WebProduct-Button rev-btn " id="slide-2946-layer-8" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['90','268','450','400']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-2948","delay":""}]' data-responsive_offset="on" data-responsive="off" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1750,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"},{"frame":"hover","speed":"300","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(51, 51, 51, 1.00);bg:rgba(255, 255, 255, 1.00);bw:2px 2px 2px 2px;"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[40,40,40,40]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[40,40,40,40]" style="z-index: 14; white-space: nowrap; letter-spacing:1px;">
+                            <a href="">How does It work </a>
+                        </div>
+
+                    </li>
+                <?php } ?>
+                <?php foreach ($models as $model) : ?>
                 <li data-index="rs-2946" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                     <!-- MAIN IMAGE -->
-                    <img src="https://via.placeholder.com/1250x550/555555" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-
-                    <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">Creative
-                        <br/> Websites
+                    <img src="<?= $model->getPhotoUrl() ?>" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                    <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">
+                        <?= $model->name ?>
                     </div>
-
                     <div class="tp-caption WebProduct-Content-Light   tp-resizeme" id="slide-2946-layer-9" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-30','127','300','270']" data-fontsize="['18','16','16','13']" data-lineheight="['27','27','22','22']" data-width="['448','356','334','277']" data-height="['none','none','76','68']" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1500,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 13; min-width: 448px; max-width: 448px; white-space: normal;">
-                        We have a number of different teams within our agency that specialise in different areas of business so you that receive a generic service.
+                        <?= $model->description ?>
                     </div>
-
+                    <?php if ($model->url) : ?>
                     <div class="tp-caption WebProduct-Button rev-btn " id="slide-2946-layer-8" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['90','268','450','400']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-2948","delay":""}]' data-responsive_offset="on" data-responsive="off" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1750,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"},{"frame":"hover","speed":"300","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(51, 51, 51, 1.00);bg:rgba(255, 255, 255, 1.00);bw:2px 2px 2px 2px;"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[40,40,40,40]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[40,40,40,40]" style="z-index: 14; white-space: nowrap; letter-spacing:1px;">
-                        <a href="">How does It work </a>
+                        <?= Html::a(Yii::t('app', 'Go to Detail'), Url::to($model->url, $model->is_absolute_url), []) ?>
                     </div>
-
+                    <?php endif; ?>
                 </li>
-
-                <!-- SLIDE  -->
-                <li data-index="rs-2948" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-saveperformance="off" data-title="Easy to Use" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-                    <!-- MAIN IMAGE -->
-                    <img src="https://via.placeholder.com/1250x550/555555" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                    <!-- LAYERS -->
-
-                    <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">Creative
-                        <br/> Websites
-                    </div>
-
-                    <div class="tp-caption WebProduct-Content-Light   tp-resizeme" id="slide-2946-layer-9" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-30','127','300','270']" data-fontsize="['18','16','16','13']" data-lineheight="['27','27','22','22']" data-width="['448','356','334','277']" data-height="['none','none','76','68']" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1500,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 13; min-width: 448px; max-width: 448px; white-space: normal;">
-                        We have a number of different teams within our agency that specialise in different areas of business so you that receive a generic service.
-                    </div>
-
-                    <div class="tp-caption WebProduct-Button rev-btn " id="slide-2946-layer-8" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['90','268','450','400']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-2948","delay":""}]' data-responsive_offset="on" data-responsive="off" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1750,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"},{"frame":"hover","speed":"300","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(51, 51, 51, 1.00);bg:rgba(255, 255, 255, 1.00);bw:2px 2px 2px 2px;"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[40,40,40,40]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[40,40,40,40]" style="z-index: 14; white-space: nowrap; letter-spacing:1px;">
-                        <a href="">How does It work </a>
-                    </div>
-
-                </li>
-
-                <!-- SLIDE  -->
-                <li data-index="rs-2947" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-saveperformance="off" data-title="Examples" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-                    <!-- MAIN IMAGE -->
-                    <img src="https://via.placeholder.com/1250x550/555555" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                    <!-- LAYERS -->
-
-                    <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">Creative
-                        <br/> Websites
-                    </div>
-
-                    <div class="tp-caption WebProduct-Content-Light   tp-resizeme" id="slide-2946-layer-9" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-30','127','300','270']" data-fontsize="['18','16','16','13']" data-lineheight="['27','27','22','22']" data-width="['448','356','334','277']" data-height="['none','none','76','68']" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1500,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 13; min-width: 448px; max-width: 448px; white-space: normal;">
-                        We have a number of different teams within our agency that specialise in different areas of business so you that receive a generic service.
-                    </div>
-
-                    <div class="tp-caption WebProduct-Button rev-btn " id="slide-2946-layer-8" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['90','268','450','400']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-2948","delay":""}]' data-responsive_offset="on" data-responsive="off" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1750,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"},{"frame":"hover","speed":"300","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgba(51, 51, 51, 1.00);bg:rgba(255, 255, 255, 1.00);bw:2px 2px 2px 2px;"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[40,40,40,40]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[40,40,40,40]" style="z-index: 14; white-space: nowrap; letter-spacing:1px;">
-                        <a href="">How does It work </a>
-                    </div>
-                </li>
-
+                <?php endforeach; ?>
             </ul>
         </div>
         <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>

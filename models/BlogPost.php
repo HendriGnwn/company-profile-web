@@ -373,7 +373,7 @@ class BlogPost extends BaseActiveRecord
         $path = $this->path . $this->photo;
 
         if (!file_exists(Yii::getAlias('@app/' . $path))) {
-            return null;
+            return 'https://via.placeholder.com/850x550';
         }
 
         return Url::to('@' . $path, true);
@@ -385,7 +385,7 @@ class BlogPost extends BaseActiveRecord
             return Html::img('https://via.placeholder.com/850x550', $options);
         }
         
-        return Html::img($this->getPhotoUrl(), $options + ['alt' => $this->name]);
+        return Html::img($this->getPhotoUrl(), $options + ['alt' => $this->title]);
     }
 
     public function getPhotoUrlHtml($name = null, $options = ['target' => '_blank']) 

@@ -82,7 +82,7 @@ class AppAsset extends AssetBundle
         $this->css = [
             'themes/'.$this->theme.'/css/fonts.css',
             'themes/'.$this->theme.'/materialize/css/materialize.min.css',
-            'themes/'.$this->theme.'/css/bootstrap.min.css',
+//            'themes/'.$this->theme.'/css/bootstrap.min.css',
             'themes/'.$this->theme.'/css/animate.css',
             'themes/'.$this->theme.'/js/plugin/rs_slider/layers.css',
             'themes/'.$this->theme.'/js/plugin/rs_slider/navigation.css',
@@ -95,6 +95,11 @@ class AppAsset extends AssetBundle
             'themes/'.$this->theme.'/css/team_style_3.css',
             'themes/'.$this->theme.'/css/custom.css',
         ];
+        
+        // for blog detail / news detail
+        if (\Yii::$app->controller->action->id == 'detail') {
+            $this->css[] = 'themes/'.$this->theme.'/css/blog_single_1.css';
+        }
         
         $this->js = [
             'themes/'.$this->theme.'/js/bootstrap.min.js',

@@ -16,7 +16,7 @@ class ServiceController extends BaseController
         $services = Service::find()->actived()->all();
         
         $pageService = \app\models\Page::findOne([
-            'slug' => 'our-services',
+            'slug' => 'program',
             'status' => \app\models\Page::STATUS_ACTIVE,
         ]);
         

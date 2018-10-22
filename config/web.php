@@ -30,6 +30,16 @@ $config = [
             'enableSession' => true,
             'authTimeout' => 60 * 60, /* 1 hour */
         ],
+        'member' => [
+            'class'=>'yii\web\User',
+            'identityClass' => 'app\models\Member',
+            'idParam'=>'member',
+            'enableAutoLogin' => true,
+            'enableSession' => true,
+            'authTimeout' => 60 * 60, /* 1 hour */
+            'loginUrl'=>'/member/signin',
+            'returnUrl'=>'/member/profile',
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

@@ -19,8 +19,15 @@ class BannerWidget extends Widget
 {
     public function run()
     {
+        $banners = \app\models\Banner::find()
+                ->actived()
+                ->orderBy([
+                    'updated_at' => SORT_DESC
+                ])
+                ->all();
+        
         return $this->render('main-banner', [
-            
+            'models' => $banners
         ]);
     }
 }

@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 
 $this->title = $name;
-$this->registerCssFile('themes/v2/css/404_style_2.css');
+$this->registerCssFile('/themes/v2/css/404_style_2.css');
 ?>
 <div class="main_wrapper_two">
     <div class="container">

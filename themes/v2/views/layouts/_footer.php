@@ -115,7 +115,7 @@ use yii\widgets\Menu;
         <div class="row">
             <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                 <div class="copyright_content">
-                    <p>Copyright &copy; 2018 <?= Html::a(Config::getAppCopyright(), Yii::$app->getHomeUrl()) ?> &nbsp;  | &nbsp;  All Rights Reserved</p>
+                    <p>Copyright &copy; 2018 <?= Html::a(Config::getAppCopyright(), Config::getAppCopyrightUrl(), ['target' => '_blank']) ?> &nbsp;  | &nbsp;  All Rights Reserved</p>
                 </div>
             </div>
         </div>

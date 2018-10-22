@@ -34,12 +34,7 @@ use yii\widgets\ActiveForm;
     ?>
     <?= $form->field($model, 'category')->widget(Select2::className(), $categoryOptions) ?>
 
-    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-        'enableKCFinder' => false,
-        'clientOptions' => [
-            'row' => 6,
-        ],
-    ]); ?>
+    <?= $form->field($model, 'description')->textarea(['row' => 6]) ?>
 
     <?php
     $status = Banner::statusLabels();

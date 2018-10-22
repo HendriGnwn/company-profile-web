@@ -21,9 +21,9 @@ return [
         // 'attribute'=>'id',
     // ],
     [
-        'attribute' => 'portfolio_id',
+        'attribute' => 'gallery_category',
         'filterType' => GridView::FILTER_SELECT2,
-        'filter' => ArrayHelper::map(Portfolio::find()->actived()->all(), 'id', 'name'),
+        'filter' => ArrayHelper::map(app\models\GalleryCategory::find()->actived()->all(), 'id', 'name'),
         'filterWidgetOptions' => [
             'theme' => Select2::THEME_DEFAULT,
             'pluginOptions' => ['allowClear' => true],
@@ -31,7 +31,13 @@ return [
         'filterInputOptions' => ['placeholder' => '-- Select --'],
         'format' => 'raw',
         'content' => function ($model) {
-            return $model->portfolio ? $model->portfolio->name : $model->portfolio_id;
+            $result = [];
+            if (count($model->getGalleryCategories()) > 0) {
+                foreach ($model->getGalleryCategories() as $category) {
+                    $result[] = $category->name;
+                }
+            }
+            return implode(', ', $result);
         }
     ],
     [
