@@ -304,6 +304,8 @@ CREATE TABLE `branch` (
   `regency_id` char(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `district_id` char(7) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `postal_code` smallint(10) NOT NULL,
+  `address_mapping` text COMMENT '{province:[{id:value,cities:[{id:value,districts:[{id:value}]}]}}]',
+  `district_mapping` text COMMENT '[id,id]',
   `status` smallint(6) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -318,8 +320,8 @@ CREATE TABLE `branch` (
   CONSTRAINT `branch_ibfk_6` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `branch` (`id`, `name`, `description`, `address`, `province_id`, `regency_id`, `district_id`, `postal_code`, `status`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1,	'Kota Tua',	NULL,	'',	'11',	'1101',	'1101010',	1,	1,	NULL,	NULL,	NULL,	NULL);
+INSERT INTO `branch` (`id`, `name`, `description`, `address`, `province_id`, `regency_id`, `district_id`, `postal_code`, `address_mapping`, `district_mapping`, `status`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(1,	'Kota Tua',	NULL,	'',	'11',	'1101',	'1101010',	1,	'[{\"id\":\"11\",\"cities\":[{\"id\":\"1101\",\"districts\":[\"1101010\"]]}]}]',	'[\"1101010\"]',	1,	NULL,	NULL,	NULL,	NULL);
 
 DROP TABLE IF EXISTS `branch_mapping_address`;
 CREATE TABLE `branch_mapping_address` (
@@ -83648,4 +83650,4 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('9107180011',	'9107180',	'KLAIN'),
 ('9107180012',	'9107180',	'SAMUSA');
 
--- 2018-10-22 02:20:13
+-- 2018-10-22 03:43:02
