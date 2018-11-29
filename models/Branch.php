@@ -47,7 +47,7 @@ class Branch extends \app\models\BaseActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code', 'district_mapping'], 'required'],
+            [['name', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required'],
             [['description'], 'string'],
             [['postal_code', 'status', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at', 'district_mapping', 'address_mapping'], 'safe'],
@@ -85,17 +85,23 @@ class Branch extends \app\models\BaseActiveRecord
     }
     
     public function beforeSave($insert) {
-        $this->address_mapping = [
-            [
-                $this->province_id => [
-                    [
-                        $this->regency_id => $this->district_mapping
+        if (count($this->district_mapping) <= 0) {
+            $this->address_mapping = $this->district_mapping = json_encode([$this->district_id]);
+        } else {
+            $districts = $this->district_mapping;
+            $districts[] = $this->district_id;
+            $this->address_mapping = [
+                [
+                    $this->province_id => [
+                        [
+                            $this->regency_id => $districts
+                        ]
                     ]
                 ]
-            ]
-        ];
-        $this->address_mapping = json_encode($this->address_mapping);
-        $this->district_mapping = json_encode($this->district_mapping);
+            ];
+            $this->address_mapping = json_encode($this->address_mapping);
+            $this->district_mapping = json_encode($districts);
+        }
         return parent::beforeSave($insert);
     }
     
@@ -147,6 +153,7 @@ class Branch extends \app\models\BaseActiveRecord
     
     public function getDistrictMappings()
     {
-        return Districts::find()->where(['in', 'id', $this->district_mapping])->all();
+        $districts = is_array($this->district_mapping) ? $this->district_mapping : json_decode($this->district_mapping, true);
+        return Districts::find()->where(['in', 'id', $districts])->all();
     }
 }

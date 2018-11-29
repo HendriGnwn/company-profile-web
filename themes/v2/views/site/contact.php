@@ -4,11 +4,10 @@ use app\models\Config;
 use app\widgets\ContactUsWidget;
 
 
-$this->title = 'Contact Us';
+$this->title = Yii::t('app', 'Contact Us');
 $this->params['breadcrumbs'][] = $this->title;
 
-$metakey = 'contact PT Qelopak Teknologi Indonesia';
-$metadescription = 'Please call to get more information of PT Qelopak Teknologi Indonesia';
+$metakey = $metadescription = Yii::t('app', 'Contact Us') . ' '. \app\models\Config::getAppCompanyName();
 
 /** SEO */
 $this->registerMetaTag([

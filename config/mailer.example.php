@@ -3,10 +3,10 @@
 return [
     'class' => 'zyx\phpmailer\Mailer',
     'viewPath' => '@app/mail',
-    'useFileTransport' => \YII_DEBUG, // change false to real sending email
+    'useFileTransport' => false, // change false to real sending email
     'config' => [
-        'mailer' => 'smpt',
-        'host' => 'smpt.lapan.co.id',
+        'mailer' => 'smtp',
+        'host' => 'smtp.lapan.co.id',
         'port' => '587',
         'smtpsecure' => 'ssl',
         'smtpauth' => true,

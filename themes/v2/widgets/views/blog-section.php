@@ -16,7 +16,7 @@ $this->registerCssFile('themes/v2/css/blog_style_6.css');
         <div class="row">
             <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 col-lg-offset-2">
                 <div class="section_heading">
-                    <h2><?= Yii::t('app', 'Latest Blog Posts') ?></h2>
+                    <h2><?= Yii::t('app', 'Latest News') ?></h2>
                     <span class="bordered-icon"><i class="fa fa-square"></i></span>
                 </div>
             </div>

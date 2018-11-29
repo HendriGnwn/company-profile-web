@@ -62,9 +62,11 @@ class Member extends BaseActiveRecord implements IdentityInterface
     
     public $current_password;
     public $new_password;
+    public $password_hash;
     public $confirm_password;
     
     public $prefix_member_code;
+    public $agree;
     
     /**
      * @var UploadedFile
@@ -105,10 +107,11 @@ class Member extends BaseActiveRecord implements IdentityInterface
     {
         return [
             [['first_name', 'email', 'phone', 'address', 'province_id', 'regency_id', 'district_id', 'postal_code'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_REGISTER, self::SCENARIO_UPDATE, self::SCENARIO_INSERT]],
-            [['password', 'prefix_member_code'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_REGISTER]],
+            [['password_hash', 'prefix_member_code'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_REGISTER]],
+            [['agree'], 'required', 'on' => [self::SCENARIO_REGISTER]],
             [['status'], 'required', 'on' => self::SCENARIO_CHANGE_STATUS],
             [['postal_code', 'branch_id', 'status', 'confirmed_by', 'created_by', 'updated_by'], 'integer'],
-            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status', 'blocked_reason'], 'safe'],
+            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'member_code', 'branch_id', 'status', 'blocked_reason', 'password'], 'safe'],
             [['email'], 'unique', 'targetAttribute' => 'email'],
             [['member_code', 'first_name', 'last_name', 'id_card_photo', 'photo'], 'string', 'max' => 100],
             [['email', 'password', 'address'], 'string', 'max' => 255],
@@ -169,6 +172,8 @@ class Member extends BaseActiveRecord implements IdentityInterface
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
+            'agree' => Yii::t('app', 'Agree'),
+            'password_hash' => Yii::t('app', 'Password'),
         ];
     }
     
@@ -176,11 +181,10 @@ class Member extends BaseActiveRecord implements IdentityInterface
     {
         $branchs = Branch::find()->actived()->all();
         foreach ($branchs as $branch) :
-            $branchMapping = json_decode($branch->district_mapping);
+            $branchMapping = ($branch->district_mapping);
             if (in_array($this->district_id, $branchMapping)) {
                 return $branch->id;
             }
-            $this->setPassword($this->password);
         endforeach;
         
         return Branch::DEFAULT_BRANCH_ID;
@@ -199,6 +203,10 @@ class Member extends BaseActiveRecord implements IdentityInterface
         
         if ($insert) {
             $this->member_code = self::generateMemberCode($this->id_card_number, $this->prefix_member_code);
+        }
+        
+        if (!empty($this->password_hash)) {
+            $this->setPassword($this->password_hash);
         }
         
         if ($this->scenario == self::SCENARIO_CHANGE_PASSWORD) {
@@ -303,7 +311,7 @@ class Member extends BaseActiveRecord implements IdentityInterface
         throw new NotSupportedException('Method "' . __CLASS__ . '::' . __METHOD__ . '" is not implemented.');
     }
 
-    public function getAuthKey(): string {
+    public function getAuthKey() {
         return md5($this->id);
     }
 
@@ -311,7 +319,7 @@ class Member extends BaseActiveRecord implements IdentityInterface
         return $this->id;
     }
 
-    public function validateAuthKey($authKey): bool {
+    public function validateAuthKey($authKey) {
         
     }
     
@@ -538,38 +546,30 @@ class Member extends BaseActiveRecord implements IdentityInterface
         ]);
     }
     
-    public function sendForgotPasswordNotification()
+    public function sendForgotPasswordNotification($newPassword)
     {
-        return true;
         $model = $this;
-        MailHelper::sendMail([
-            'to' => $this->email,
-            'replyTo' => [],
-            'subject' => 'Forgot Password',
-            'view' => ['html' => 'member/forgot-password'],
-            'viewParams' => [
-                'model' => $model
-            ],
-        ]);
+        $mail = Yii::$app->mailer
+			->compose(['html' => 'member/forgot-password'], ['model' => $model, 'newPassword' => $newPassword])
+			->setFrom([Config::getEmailNoReply() => Yii::$app->name])
+			->setTo($this->email)
+			->setSubject(Config::getEmailSubject() . ' | Lupa Password')
+            ->send();
         
-        return true;
+        return $mail;
     }
     
     public function sendRegisterNotification()
     {
-        return true;
         $model = $this;
-        MailHelper::sendMail([
-            'to' => $this->email,
-            'replyTo' => [],
-            'subject' => 'Register Sukses',
-            'view' => ['html' => 'member/register'],
-            'viewParams' => [
-                'model' => $model
-            ],
-        ]);
+        $mail = Yii::$app->mailer
+			->compose(['html' => 'member/register'], ['model' => $model])
+			->setFrom([Config::getEmailNoReply() => Yii::$app->name])
+			->setTo($this->email)
+			->setSubject(Config::getEmailSubject() . ' | Registrasi Berhasil, Selamat datang di ' . Config::getAppName())
+            ->send();
         
-        return true;
+        return $mail;
     }
     
     public function getFullName()

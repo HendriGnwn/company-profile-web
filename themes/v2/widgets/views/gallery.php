@@ -16,7 +16,7 @@ $this->registerCssFile('/themes/v2/css/portfolio_masonry_style_1.css');
         <div class="row">
             <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 col-lg-offset-2">
                 <div class="section_heading">
-                    <h2><?= Yii::t('app', 'Works') ?></h2>
+                    <h2><?= Yii::t('app', 'Galleries') ?></h2>
                     <span class="bordered-icon"><i class="fa fa-square"></i></span>
                 </div>
             </div>
@@ -26,7 +26,7 @@ $this->registerCssFile('/themes/v2/css/portfolio_masonry_style_1.css');
         <div class="container">
             <div class="portfolio-filter clearfix text-center">
                 <ul class="list-inline" id="filter">
-                    <li><a class="active" data-group="all">All</a></li>
+                    <li><a class="active" data-group="all"><?= Yii::t('app', 'All') ?></a></li>
                     <?php foreach($categories as $category) : ?>
                     <li><a data-group="<?= $category->slug ?>"><?= $category->name ?></a></li>
                     <?php endforeach; ?>
@@ -37,7 +37,7 @@ $this->registerCssFile('/themes/v2/css/portfolio_masonry_style_1.css');
 
                     <div class="alert fade_info .fade">
                         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                        <strong>Info Message: Portfolio is empty</strong>
+                        <strong><?= Yii::t('app', 'Content is empty') ?></strong>
                         <p><strong>Please contact us if the website there is a problem, thank you.</strong</p>
                     </div>
 

@@ -36,7 +36,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?php if ($model->isNewRecord): ?>
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true]) ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 

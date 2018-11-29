@@ -1,22 +1,21 @@
 <?php
 
 use app\models\Config;
-use app\models\Contact;
+use app\models\Member;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/* @var $model Contact */
-
+/* @var $model Member */
 ?>
 <br/>
-Hello <?= $model->getFullName() ?>,
+Hello <?= $model->first_name ?>,
 <br/>
 Kamu telah melakukan submit lupa password dengan detail dan password baru sebagai berikut:
 <br/>
-<table id="test">
+<table>
     <tr>
         <td>Nama</td>
         <td>:</td>
@@ -35,7 +34,7 @@ Kamu telah melakukan submit lupa password dengan detail dan password baru sebaga
 </table>
 
 <br/><br/>
-Thanks
+Terimakasih
 
 <br/><br/>
 <?= Config::getAppCompanyName() ?>

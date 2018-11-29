@@ -41,10 +41,15 @@ class WebsiteInformationForm extends Model
     public $progress_network_development;
     public $app_company_name;
     public $app_favicon;
+    
     public $app_color_primary;
+    public $app_background_primary;
     public $app_color_secondary;
+    public $app_background_secondary;
     public $app_color_footer_content;
+    public $app_background_footer_content;
     public $app_color_footer_copyright;
+    public $app_background_footer_copyright;
     
     public $appLogoFile;
     public $appFaviconFile;
@@ -81,10 +86,15 @@ class WebsiteInformationForm extends Model
         $this->app_company_name = Config::getAppCompanyName();
         $this->app_seo_image_url = Config::getAppSeoImageUrl();
         $this->app_seo_alt_image = Config::getAppSeoAltImage();
+        
         $this->app_color_primary = Config::getAppColorPrimary();
+        $this->app_background_primary = Config::getAppBackgroundPrimary();
         $this->app_color_secondary = Config::getAppColorSecondary();
+        $this->app_background_secondary = Config::getAppBackgroundSecondary();
         $this->app_color_footer_content = Config::getAppColorFooterContent();
+        $this->app_background_footer_content = Config::getAppBackgroundFooterContent();
         $this->app_color_footer_copyright = Config::getAppColorFooterCopyright();
+        $this->app_background_footer_copyright = Config::getAppBackgroundFooterCopyright();
         
         return parent::init();
     }
@@ -126,9 +136,13 @@ class WebsiteInformationForm extends Model
                 'app_seo_alt_image',
                 'app_seo_image_url',
                 'app_color_primary',
+                'app_background_primary',
                 'app_color_secondary',
+                'app_background_secondary',
                 'app_color_footer_content',
+                'app_background_footer_content',
                 'app_color_footer_copyright',
+                'app_background_footer_copyright',
             ], 
             'safe'],
             [['appLogoFile', 'appSeoImageFile'], 'file', 'skipOnEmpty' => true, 'checkExtensionByMimeType' => true,
@@ -201,13 +215,13 @@ class WebsiteInformationForm extends Model
             Config::setValueByName('app_seo_image_url', $this->app_seo_image_url);
             Config::setValueByName('app_seo_alt_image', $this->app_seo_alt_image);
             Config::setValueByName('email_subject', $this->email_subject);
-            Config::setValueByName('email_admin', $this->email_admin);
+            //Config::setValueByName('email_admin', $this->email_admin);
             Config::setValueByName('email_noreply', $this->email_noreply);
             Config::setValueByName('email_web_support', $this->email_web_support);
-            Config::setValueByName('counter_year_of_experience', $this->counter_year_of_experience);
-            Config::setValueByName('counter_project_completed', $this->counter_project_completed);
-            Config::setValueByName('counter_happy_customers', $this->counter_happy_customers);
-            Config::setValueByName('counter_our_employees', $this->counter_our_employees);
+//            Config::setValueByName('counter_year_of_experience', $this->counter_year_of_experience);
+//            Config::setValueByName('counter_project_completed', $this->counter_project_completed);
+//            Config::setValueByName('counter_happy_customers', $this->counter_happy_customers);
+//            Config::setValueByName('counter_our_employees', $this->counter_our_employees);
             Config::setValueByName('app_metakey', $this->app_metakey);
             Config::setValueByName('app_metadesc', $this->app_metadesc);
             Config::setValueByName('app_logo', $this->app_logo);
@@ -219,9 +233,14 @@ class WebsiteInformationForm extends Model
             Config::setValueByName('app_company_name', $this->app_company_name);
             Config::setValueByName('app_favicon', $this->app_favicon);
             Config::setValueByName('app_color_primary', $this->app_color_primary);
+            Config::setValueByName('app_background_primary', $this->app_background_primary);
             Config::setValueByName('app_color_secondary', $this->app_color_secondary);
+            Config::setValueByName('app_background_secondary', $this->app_background_secondary);
             Config::setValueByName('app_color_footer_content', $this->app_color_footer_content);
+            Config::setValueByName('app_background_footer_content', $this->app_background_footer_content);
             Config::setValueByName('app_color_footer_copyright', $this->app_color_footer_copyright);
+            Config::setValueByName('app_background_footer_copyright', $this->app_background_footer_copyright);
+            
             return true;
         }
         return false;

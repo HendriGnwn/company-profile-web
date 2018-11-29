@@ -9,13 +9,13 @@
 
 ?>
 <br/>
-Hello Admin,
+Dear Admin,
 <br/>
-Someone calling you via Contact Form with details in following below:
+Seseorang menghubungi via Form Kontak Kami dengan detail sebagai berikut:
 <br/>
 <table>
     <tr>
-        <td>Name</td>
+        <td>Nama</td>
         <td>:</td>
         <td><?= $model->getFullName() ?></td>
     </tr>
@@ -25,18 +25,18 @@ Someone calling you via Contact Form with details in following below:
         <td><?= $model->email ?></td>
     </tr>
     <tr>
-        <td>Phone</td>
+        <td>No HP</td>
         <td>:</td>
         <td><?= $model->phone ?></td>
     </tr>
     <tr>
-        <td>Subject</td>
+        <td><?= Yii::t('app', 'Subject') ?></td>
         <td>:</td>
         <td><?= $model->subject ?></td>
     </tr>
 </table>
-In here is description: <br/>
+<?= Yii::t('app', 'Description') ?>: <br/>
 <?= $model->description ?>
 
 <br/><br/>
-Thanks
+Terimakasih

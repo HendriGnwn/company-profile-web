@@ -9,8 +9,8 @@ use yii\helpers\Html;
 /* @var $content string main view render result */
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
     <title><?= Html::encode($this->title) ?></title>
@@ -69,9 +69,6 @@ use yii\helpers\Html;
                         <td id="header">
                             <table cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
-                                    <td class="logo" align="center">
-                                        <a href="#"><img src="<?= Url::to(['data/img/logo.png'], true) ?> " alt="" style="display: block; border: 0;width:80px;" /></a>
-                                    </td>
                                     <td align="right" class="toggle" style="display: none; width: 0; max-height: 0; max-width: 0; height: 0; overflow: hidden; float: left; font-size: 0;">
                                         <a href="#mobile_nav">Menu</a>
                                     </td>
@@ -84,16 +81,13 @@ use yii\helpers\Html;
                             <table cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAFAF0;">
                                 <tr>
                                     <td align="center" style="padding: 15px 20px; font-family: arial,sans-serif; font-size: 14px; font-weight: bold;">
-                                        <a href="<?= Url::to(['/'], true) ?>" style="text-decoration: none; color: #03A9F4;">Home</a>
+                                        <a href="<?= Url::to(['/'], true) ?>" style="text-decoration: none; color: #03A9F4;"><?= Yii::t('app', 'Home') ?></a>
                                     </td>
                                     <td align="center" style="padding: 15px 20px; font-family: arial,sans-serif; font-size: 14px; font-weight: bold;">
-                                        <a href="<?= Url::to(['/site/about'], true) ?>" style="text-decoration: none; color: #03A9F4;">About Us</a>
+                                        <a href="<?= Url::to(['/site/about'], true) ?>" style="text-decoration: none; color: #03A9F4;"><?= Yii::t('app', 'Program') ?></a>
                                     </td>
                                     <td align="center" style="padding: 15px 20px; font-family: arial,sans-serif; font-size: 14px; font-weight: bold;">
-                                        <a href="<?= Url::to(['/service/index'], true) ?>" style="text-decoration: none; color: #03A9F4;">Service</a>
-                                    </td>
-                                    <td align="center" style="padding: 15px 20px; font-family: arial,sans-serif; font-size: 14px; font-weight: bold;">
-                                        <a href="<?= Url::to(['/portfolio/index'], true) ?>" style="text-decoration: none; color: #03A9F4;">Portfolio</a>
+                                        <a href="<?= Url::to(['/site/contact'], true) ?>" style="text-decoration: none; color: #03A9F4;"><?= Yii::t('app', 'Contact Us') ?></a>
                                     </td>
                                 </tr>
                             </table>
@@ -103,7 +97,7 @@ use yii\helpers\Html;
                 
                 <table cellpadding="0" cellspacing="0">
                     <tr class="main_nav">
-                        <td id="mobile_nav" width="600">
+                        <td width="600">
                             <?= $content ?>
                             <br/>
                         </td>
@@ -112,12 +106,11 @@ use yii\helpers\Html;
                 
                 <table cellpadding="0" cellspacing="0">
                     <tr class="main_nav">
-                        <td id="mobile_nav" width="600">
+                        <td width="600">
                             <hr/>
                             <p>
                                 This email was sent by: <?= Yii::$app->name ?><br>
                                 <?= Config::getAppContactAddress() ?><br><br>
-                                <a href="#" style="color: #999;">Preferences</a> | <a href="#" style="color: #999;">Unsubscribe</a>
                             </p>
                         </td>
                     </tr>

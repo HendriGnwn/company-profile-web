@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $form->field($model, 'email_subject')->textInput(['maxlength' => true]) ?>
                             </div>
                             <div class="col-md-6">
+                                <?= $form->field($model, 'app_contact_address')->textarea() ?>
                                 <?= $form->field($model, 'app_contact_phone')->textInput(['maxlength' => true]) ?>
                                 <?= $form->field($model, 'app_account_facebook')->textInput(['maxlength' => true]) ?>
                                 <?= $form->field($model, 'app_account_twitter')->textInput(['maxlength' => true]) ?>
@@ -51,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 
-                <div class="panel panel-primary">
+                <div class="panel panel-primary hide">
                     <div class="panel-heading">Counters Information</div>
                     <div class="panel-body">
                         <div class="row">
@@ -67,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 
-                <div class="panel panel-primary">
+                <div class="panel panel-primary hide">
                     <div class="panel-heading">About Information</div>
                     <div class="panel-body">
                         <div class="row">
@@ -102,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 
-                <div class="panel panel-primary hide">
+                <div class="panel panel-primary">
                     <div class="panel-heading">Templating</div>
                     <div class="panel-body">
                         <div class="row">
@@ -113,12 +114,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $form->field($model, 'app_color_secondary')->widget(ColorInput::classname(), [
                                     'options' => ['placeholder' => 'Select color ...'],
                                 ]) ?>
-                            </div>
-                            <div class="col-md-6">
                                 <?= $form->field($model, 'app_color_footer_content')->widget(ColorInput::classname(), [
                                     'options' => ['placeholder' => 'Select color ...'],
                                 ]) ?>
                                 <?= $form->field($model, 'app_color_footer_copyright')->widget(ColorInput::classname(), [
+                                    'options' => ['placeholder' => 'Select color ...'],
+                                ]) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'app_background_primary')->widget(ColorInput::classname(), [
+                                    'options' => ['placeholder' => 'Select color ...'],
+                                ]) ?>
+                                <?= $form->field($model, 'app_background_secondary')->widget(ColorInput::classname(), [
+                                    'options' => ['placeholder' => 'Select color ...'],
+                                ]) ?>
+                                <?= $form->field($model, 'app_background_footer_content')->widget(ColorInput::classname(), [
+                                    'options' => ['placeholder' => 'Select color ...'],
+                                ]) ?>
+                                <?= $form->field($model, 'app_background_footer_copyright')->widget(ColorInput::classname(), [
                                     'options' => ['placeholder' => 'Select color ...'],
                                 ]) ?>
                             </div>

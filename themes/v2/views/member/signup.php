@@ -141,8 +141,11 @@ $this->registerCssFile('/themes/v2/css/login_and_register.css');
                                 ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('email')]) ?>
                         </div>
                         <div class="formsix-e">
-                            <?= $form->field($model, 'password')
+                            <?= $form->field($model, 'password_hash')
                                 ->passwordInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('password')]) ?>
+                        </div>
+                        <div class="formsix-e">
+                            <?= $form->field($model, 'agree')->checkbox(['label' => 'Saya setuju <a target="_blank" href="/page/term-condition" style="color:#999">Ketentuan Penggunaan</a> dan <a target="_blank" href="/page/privacy-policy" style="color:#999">Kebijakan Privasi</a>']) ?>
                         </div>
                         <div class="login_btn_wrapper">
                             <?= Html::submitButton(Yii::t('app', 'Sign Up'), ['class' => 'btn btn-primary login_btn', 'name' => 'login-button']) ?>

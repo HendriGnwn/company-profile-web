@@ -19,6 +19,7 @@
     'items' => [
         ['label' => Yii::t('app', 'Profile'), 'url' => ['/member/profile']],
         ['label' => Yii::t('app', 'Photo Details'), 'url' => ['/member/photo']],
+        ['label' => Yii::t('app', 'Branch Office Information'), 'url' => ['/member/branch-information']],
         ['label' => Yii::t('app', 'Update Profile'), 'url' => ['/member/update-profile']],
         ['label' => Yii::t('app', 'Change Password'), 'url' => ['/member/change-password']],
     ]

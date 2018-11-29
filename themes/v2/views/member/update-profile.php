@@ -89,7 +89,7 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'id_card_number')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('id_card_number')]) ?>
+                                        ->textInput(['readonly' => true, 'placeholder'=> $model->getAttributeLabel('id_card_number')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <label for="Member_id_card_photo"><?= $model->getAttributeLabel('id_card_photo') ?></label>
@@ -154,6 +154,7 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                                     <?= Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-primary login_btn', 'name' => 'login-button']) ?>
                                 </div>
                                 <?php ActiveForm::end(); ?>
+                            </div>
                         </div>
                     </div>
 

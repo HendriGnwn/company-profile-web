@@ -9,11 +9,10 @@ use yii\widgets\LinkPager;
 /* @var $this View */
 /* @var $blogPosts BlogPost */
 
-$this->title = 'Blog Posts';
+$this->title = Yii::t('app', 'News Posts');
 $this->params['breadcrumbs'][] = $this->title;
 
-$metakey = 'Blog Build web and network, tutorials, tips, workshop, project development, PT Qelopak Teknologi Indonesia';
-$description = 'This is a list Blog Posts, you will be know about us in here';
+$metakey = $description = Yii::t('app', 'News Posts') . ' '. \app\models\Config::getAppCompanyName();
 
 /** SEO */
 $this->registerMetaTag([

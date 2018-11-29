@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "97d40fe2136f42f63e170cbb64cf8e16",
@@ -366,7 +366,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-10-14T08:42:41+00:00"
+            "time": "2017-10-14 08:42:41"
         },
         {
             "name": "c006/yii2-migration-utility",
@@ -405,7 +405,7 @@
                 "tables",
                 "yii2"
             ],
-            "time": "2018-02-02T04:28:58+00:00"
+            "time": "2018-02-02 04:28:58"
         },
         {
             "name": "cebe/markdown",
@@ -549,7 +549,7 @@
                 "text",
                 "wysiwyg"
             ],
-            "time": "2017-09-13T13:08:14+00:00"
+            "time": "2017-09-13 13:08:14"
         },
         {
             "name": "composer/installers",
@@ -919,7 +919,7 @@
                 "icon",
                 "yii2"
             ],
-            "time": "2017-05-02T11:33:28+00:00"
+            "time": "2017-05-02 11:33:28"
         },
         {
             "name": "iutbay/yii2-kcfinder",
@@ -961,7 +961,7 @@
                 "kcfinder",
                 "yii2"
             ],
-            "time": "2017-05-03T17:07:56+00:00"
+            "time": "2017-05-03 17:07:56"
         },
         {
             "name": "johnitvn/yii2-ajaxcrud",
@@ -1468,7 +1468,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-21T09:47:37+00:00"
+            "time": "2018-09-21 09:47:37"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -1574,7 +1574,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-12T03:12:07+00:00"
+            "time": "2018-09-12 03:12:07"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -1682,7 +1682,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-10-09T11:43:32+00:00"
+            "time": "2018-10-09 11:43:32"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1783,7 +1783,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-07-06T19:56:33+00:00"
+            "time": "2016-07-06 19:56:33"
         },
         {
             "name": "mpdf/mpdf",
@@ -2312,7 +2312,7 @@
                 "kcfinder",
                 "manager"
             ],
-            "time": "2014-09-27T18:47:34+00:00"
+            "time": "2014-09-27 18:47:34"
         },
         {
             "name": "webcreate/jquery-ias",

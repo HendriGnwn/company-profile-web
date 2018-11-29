@@ -49,6 +49,10 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                             <br/>
                             <table class="table table-condensed table-striped table-hover">
                                 <tr>
+                                    <th width='30%'><?= $model->getAttributeLabel('member_code') ?></th>
+                                    <td><?= $model->member_code ?></td>
+                                </tr>
+                                <tr>
                                     <th width='30%'><?= $model->getAttributeLabel('first_name') ?></th>
                                     <td><?= $model->first_name ?></td>
                                 </tr>

@@ -57,7 +57,66 @@ class DefaultController extends BaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $members = \app\models\Member::find()->count();
+        $activedMembers = \app\models\Member::find()
+                ->where([
+                    'status' => \app\models\Member::STATUS_ACTIVE
+                ])
+                ->count();
+        
+        $counterVisitor = \app\models\Config::getCounterVisitor();
+        $counterWebsiteAge = \app\models\Config::getCounterWebsiteAge();
+        $statisticsDisk = \app\models\Config::getStatisticsDiskUsage();
+        $statisticsCpu = \app\models\Config::getStatisticsCpuUsage();
+        $statisticsRam = \app\models\Config::getStatisticsRamUsage();
+        $statisticsBandwidth = \app\models\Config::getStatisticsBandwidth();
+        
+        if ($statisticsDisk->value < 60) {
+            $statisticsDiskProgressClass = 'progress-bar-success';
+        } else if ($statisticsDisk->value >= 60 && $statisticsDisk->value <= 90) {
+            $statisticsDiskProgressClass = 'progress-bar-warning';
+        } else {
+            $statisticsDiskProgressClass = 'progress-bar-danger';
+        }
+        
+        if ($statisticsCpu->value < 60) {
+            $statisticsCpuProgressClass = 'progress-bar-success';
+        } else if ($statisticsCpu->value >= 60 && $statisticsCpu->value <= 90) {
+            $statisticsCpuProgressClass = 'progress-bar-warning';
+        } else {
+            $statisticsCpuProgressClass = 'progress-bar-danger';
+        }
+        
+        if ($statisticsRam->value < 60) {
+            $statisticsRamProgressClass = 'progress-bar-success';
+        } else if ($statisticsRam->value >= 60 && $statisticsRam->value <= 90) {
+            $statisticsRamProgressClass = 'progress-bar-warning';
+        } else {
+            $statisticsRamProgressClass = 'progress-bar-danger';
+        }
+        
+        if ($statisticsBandwidth->value < 60) {
+            $statisticsBandwidthProgressClass = 'progress-bar-success';
+        } else if ($statisticsDisk->value >= 60 && $statisticsBandwidth->value <= 90) {
+            $statisticsBandwidthProgressClass = 'progress-bar-warning';
+        } else {
+            $statisticsBandwidthProgressClass = 'progress-bar-danger';
+        }
+        
+        return $this->render('index', [
+            'members' => $members,
+            'activedMembers' => $activedMembers,
+            'counterVisitor' => $counterVisitor,
+            'counterWebsiteAge' => $counterWebsiteAge,
+            'statisticsDisk' => $statisticsDisk,
+            'statisticsCpu' => $statisticsCpu,
+            'statisticsRam' => $statisticsRam,
+            'statisticsBandwidth' => $statisticsBandwidth,
+            'statisticsDiskProgressClass' => $statisticsDiskProgressClass,
+            'statisticsCpuProgressClass' => $statisticsCpuProgressClass,
+            'statisticsRamProgressClass' => $statisticsRamProgressClass,
+            'statisticsBandwidthProgressClass' => $statisticsBandwidthProgressClass,
+        ]);
     }
 	
 	/**

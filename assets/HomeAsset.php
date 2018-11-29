@@ -18,11 +18,11 @@ class HomeAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $depends = [
-        'yii\web\YiiAsset',
+        // 'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'app\assets\FontAsset',
         'app\assets\FontAwesomeAsset',
-        'app\assets\SliderAsset',
+//        'app\assets\SliderAsset',
     ];
     
     public function init() 

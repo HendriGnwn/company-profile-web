@@ -175,7 +175,7 @@ class Config extends \yii\db\ActiveRecord
         $query = self::findByName($name);
         $query->value = $value;
         
-        return $query->save();
+        return $query->save(false);
     }
     
     /**
@@ -591,9 +591,19 @@ class Config extends \yii\db\ActiveRecord
         return self::getValueByName('app_color_primary');
     }
     
+    public static function getAppBackgroundPrimary()
+    {
+        return self::getValueByName('app_background_primary');
+    }
+    
     public static function getAppColorSecondary()
     {
         return self::getValueByName('app_color_secondary');
+    }
+    
+    public static function getAppBackgroundSecondary()
+    {
+        return self::getValueByName('app_background_secondary');
     }
     
     public static function getAppColorFooterContent()
@@ -601,8 +611,58 @@ class Config extends \yii\db\ActiveRecord
         return self::getValueByName('app_color_footer_content');
     }
     
+    public static function getAppBackgroundFooterContent()
+    {
+        return self::getValueByName('app_background_footer_content');
+    }
+    
     public static function getAppColorFooterCopyright()
     {
         return self::getValueByName('app_color_footer_copyright');
+    }
+    
+    public static function getAppBackgroundFooterCopyright()
+    {
+        return self::getValueByName('app_background_footer_copyright');
+    }
+    
+    public static function getCounterVisitor()
+    {
+        return self::findByName('counter_visitor');
+    }
+    
+    public static function getCounterWebsiteAge()
+    {
+        return self::findByName('counter_website_age');
+    }
+    
+    public static function setCounterVisitor($value)
+    {
+        return self::setValueByName('counter_visitor', $value);
+    }
+    
+    public static function setCounterWebsiteAge($value)
+    {
+        return self::setValueByName('counter_website_age', $value);
+    }
+    
+    public static function getStatisticsDiskUsage()
+    {
+        return self::findByName('statistics_disk_usage');
+    }
+    
+    public static function getStatisticsBandwidth()
+    {
+        return self::findByName('statistics_bandwidth');
+    }
+    
+    public static function getStatisticsCpuUsage()
+    {
+        return self::findByName('statistics_cpu_usage');
+    }
+    
+    public static function getStatisticsRamUsage()
+    {
+        return self::findByName('statistics_ram_usage');
     }
 }
