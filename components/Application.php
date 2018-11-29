@@ -248,6 +248,10 @@ class Application extends \yii\web\Application
                 background-color: $backgroundPrimary;
                 color: $colorPrimary;
             }
+            .bg-primary {
+                background-color: $backgroundPrimary;
+                color: $colorPrimary;
+            }
         ");
         
         // secondary

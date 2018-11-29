@@ -17,7 +17,7 @@ use yii\helpers\Url;
         <div id="rev_slider_1052_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.1">
             <ul>
                 <!-- SLIDE  -->
-                <?php if (count($models) <= 0) { ?>
+                <?php if (count($models) < 0) { ?>
                     <li data-index="rs-2946" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                         <!-- MAIN IMAGE -->
                         <img src="https://via.placeholder.com/1250x550/555555" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
@@ -37,7 +37,7 @@ use yii\helpers\Url;
                     </li>
                 <?php } ?>
                 <?php foreach ($models as $model) : ?>
-                <li data-index="rs-2946" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                <li data-index="rs-<?= $model->id ?>" data-transition="slidevertical" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1500" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                     <!-- MAIN IMAGE -->
                     <img src="<?= $model->getPhotoUrl() ?>" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                     <div class="tp-caption WebProduct-Title-Light   tp-resizeme" id="slide-2946-layer-7" data-x="['left','left','left','left']" data-hoffset="['120','30','200','80']" data-y="['middle','middle','top','top']" data-voffset="['-210','-80','137','130']" data-fontsize="['70','70','50','50']" data-lineheight="['90','90','50','50']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 11; white-space: nowrap;">
@@ -73,22 +73,21 @@ $this->registerJs("
         } else {
             revapi1052 = tpj('#rev_slider_1052_1').show().revolution({
                 sliderType: 'standard',
-                jsFileLocation: 'revolution/js/',
-                sliderLayout: 'fullscreen',
-                dottedOverlay: 'none',
-                delay: 9000,
+                jsFileLocation: '',
+                sliderLayout: 'auto',
+                /*dottedOverlay: 'none',*/
+                delay: 5000,
                 navigation: {
-                    keyboardNavigation: 'on',
+                    keyboardNavigation: 'off',
                     keyboard_direction: 'horizontal',
                     mouseScrollNavigation: 'off',
-                    mouseScrollReverse: 'default',
-                    onHoverStop: 'off',
+                    onHoverStop: 'on',
                     touch: {
-                        touchenabled: 'on',
-                        swipe_threshold: 75,
-                        swipe_min_touches: 50,
-                        swipe_direction: 'horizontal',
-                        drag_block_vertical: false
+                        touchenabled: 'off',
+                        swipe_treshold: 75,
+                        swipe_min_touches: 1,
+                        drag_block_vertical: !1,
+                        swipe_direction: 'horizontal'
                     },
                     arrows: {
                         style: 'uranus',
@@ -111,7 +110,7 @@ $this->registerJs("
                         }
                     },
                     bullets: {
-                        enable: false,
+                        enable: true,
                         hide_onmobile: false,
                         hide_under: 1024,
                         style: 'hephaistos',
@@ -127,21 +126,19 @@ $this->registerJs("
                 },
                 responsiveLevels: [1240, 1024, 778, 480],
                 visibilityLevels: [1240, 1024, 778, 480],
-                gridwidth: [1400, 1240, 778, 480],
-                gridheight: [868, 768, 960, 720],
-                lazyType: 'none',
+                gridwidth: [1170, 1170, 1170, 700],
+                gridheight: [635, 635, 635, 355],
+                /*gridwidth: 1000,
+                gridheight: 500,*/
+                lazyType: 'smart',
                 shadow: 0,
-                spinner: 'off',
-                stopLoop: 'on',
-                stopAfterLoops: 0,
-                stopAtSlide: 1,
+                spinner: 'spinner0',
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
                 shuffle: 'off',
                 autoHeight: 'off',
-                fullScreenAutoWidth: 'off',
-                fullScreenAlignForce: 'off',
-                fullScreenOffsetContainer: '',
-                fullScreenOffset: '',
-                disableProgressBar: 'on',
+                disableProgressBar: 'off',
                 hideThumbsOnMobile: 'off',
                 hideSliderAtLimit: 0,
                 hideCaptionAtLimit: 0,
