@@ -57,7 +57,10 @@ class MemberForgotPasswordForm extends Model
     public function send()
     {
         if ($this->validate()) {
-            return $this->getUser()->sendForgotPasswordNotification();
+            $newPassword = Yii::$app->security->generateRandomString(10);
+            $this->getUser()->setPassword($newPassword);
+            $this->getUser()->save(false);
+            return $this->getUser()->sendForgotPasswordNotification($newPassword);
         }
         return false;
     }

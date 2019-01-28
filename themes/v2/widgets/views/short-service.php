@@ -11,7 +11,7 @@
             <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                 <div class="icon_text">
                     <div class="icon_text_effect">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
                     </div>
                     <h4 class="text-center"><a href="#"><?= $service->name ?></a></h4>
                     <p class="text-center"><?= $service->description ?></p>

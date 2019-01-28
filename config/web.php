@@ -4,7 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $activeFrontTheme = $params['activeFrontTheme'];
 $activeAdminTheme = $params['activeAdminTheme'];
-
+date_default_timezone_set('Asia/Jakarta');
 $config = [
     'id' => 'atc-art-techno',
     'basePath' => dirname(__DIR__),

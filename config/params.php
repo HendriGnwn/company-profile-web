@@ -8,4 +8,5 @@ return [
     'modalBlock' => 0,
     'activeFrontTheme' => 'v2',
     'activeAdminTheme' => 'admin-lte',
+    'mail_noreply' => ''
 ];

@@ -165,7 +165,7 @@ class BranchController extends BaseController
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post())){
-                $model->district_mapping = $request->post('Branch')['district_mapping'];
+                $model->district_mapping = $request->post('Branch')['district_mapping'] != '' ? $request->post('Branch')['district_mapping'] : [];
                 
                 $model->save();
                 return [

@@ -79,7 +79,7 @@ $this->registerJs('
 
 <?= TeamWidget::widget() ?>
 
-<div class="progressFour ptb-100">
+<div class="progressFour ptb-10 hide">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12 col-lg-offset-2">
@@ -178,7 +178,7 @@ $this->registerJs('
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12 col-lg-offset-3">
                 <div class="section_heading text_wrapper">
-                    <h2><?= Yii::t('app', 'Our Client') ?></h2>
+                    <h2><?= Yii::t('app', 'Our Clients') ?></h2>
                     <span class="bordered-icon"><i class="fa fa-square"></i></span>
                 </div>
             </div>

@@ -16,12 +16,12 @@ use yii\widgets\Menu;
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">
                     <div class="wrapper_second_about">
-                        <h4>About Us</h4>
+                        <h4><?= Yii::t('app', 'About Us') ?></h4>
                         <div class="abotus_content">
                             <p><?= Config::getAppMotto() ?></p>
                         </div>
                         <div class="aboutus_link">
-                            <a href="<?= Url::to('about-us') ?>">Read More<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            <a href="<?= Url::to('about-us') ?>"><?= Yii::t('app', 'Read More') ?><i class="fa fa-caret-right" aria-hidden="true"></i></a>
                         </div>
                         <?= Menu::widget([
                             'options' => ['class' => 'aboutus_social_icons'],
@@ -50,7 +50,7 @@ use yii\widgets\Menu;
                 </div>
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">
                     <div class="wrapper_second_useful">
-                        <h4>Useful Link</h4>
+                        <h4><?= Yii::t('app', 'Useful Link') ?></h4>
                         <?= Menu::widget([
 //                            'options' => ['class' => 'footer-list'],
                             'items' => (new Menu2())->getMenus(Menu2::CATEGORY_MAIN_FOOTER),
@@ -70,7 +70,7 @@ use yii\widgets\Menu;
                 </div>
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">
                     <div class="wrapper_second_blog">
-                        <h4>From the Blog</h4>
+                        <h4><?= Yii::t('app', 'From the News') ?></h4>
                         <?php
                         $blogs = app\models\BlogPost::getSearch(['result' => 'result', 'limit' => 2]);
                         foreach ($blogs as $blog) :
@@ -89,7 +89,7 @@ use yii\widgets\Menu;
                 </div>
                 <div class="col-lg-3 col-md-6 col-xs-12 col-sm-6">
                     <div class="wrapper_second_contact">
-                        <h4>Contact Us</h4>
+                        <h4><?= Yii::t('app', 'Contact Us') ?></h4>
                         <ul>
                             <li><i class="fa fa-map-marker"></i>
                                 <p><?= Config::getAppContactAddress() ?></p>

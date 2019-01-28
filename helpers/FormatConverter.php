@@ -76,4 +76,19 @@ class FormatConverter extends BaseFormatConverter
 		
 		return date_format($date, $format);
 	}
+    
+    public static function getDaysInDateRange($start, $end)
+    {
+        $startTimeStamp = strtotime($start);
+        $endTimeStamp = strtotime($end);
+
+        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+
+        $numberDays = $timeDiff/86400;  // 86400 seconds in one day
+
+        // and you might want to convert to integer
+        $numberDays = intval($numberDays);
+        
+        return $numberDays;
+    }
 }

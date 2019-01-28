@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <?php if (\Yii::$app->member->isGuest) : ?>
 <li class="dropdown signin_wrapper">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-sign-in"></i> Login / Register
+        <i class="fa fa-sign-in"></i> <?= Yii::t('app', 'Login')?> / <?= Yii::t('app', 'Register') ?>
     </a>
     <?php
     $form = ActiveForm::begin([
@@ -51,19 +51,19 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 </div>
                 <div class="col-md-7">
-                    <?= Html::a('Forgot Password', ['/member/forgot-password'], ['class' => 'forget_password']) ?>
+                    <?= Html::a(Yii::t('app', 'Forgot Password'), ['/member/forgot-password'], ['class' => 'forget_password']) ?>
 <!--                    <a href="" class="forget_password">
                         Forgot Password
                     </a>-->
                 </div>
             </div>
             <div class="login_wrapper">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary login_btn', 'name' => 'login-button']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary login_btn', 'name' => 'login-button']) ?>
             </div>
             <div class="sign_up_message">
                 <p>
-                    <?= Yii::t('app', 'Don’t have an account ?') ?>
-                    <?= Html::a(Yii::t('app', 'Sign Up'), ['/member/signup']) ?>
+                    <?= Yii::t('app', 'Don\'t have an account ?') ?>
+                    <?= Html::a(Yii::t('app', 'Register'), ['/member/signup']) ?>
                 </p>
             </div>
             <?php ActiveForm::end(); ?>

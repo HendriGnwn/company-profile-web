@@ -7792,7 +7792,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `member` (`id`, `member_code`, `first_name`, `last_name`, `email`, `password`, `phone`, `id_card_number`, `id_card_photo`, `photo`, `address`, `province_id`, `regency_id`, `district_id`, `postal_code`, `branch_id`, `status`, `confirmed_at`, `confirmed_by`, `blocked_at`, `blocked_reason`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(6,	'123123123',	'Hendri',	'Gunawan',	'hendri.gnw@gmail.com',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'',	NULL,	NULL,	NULL,	'',	'11',	'1101',	'1101010',	1,	1,	1,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL),
+(6,	'123123123',	'Hendri',	'Gunawan',	'hendri.gnw@gmail.com',	'$2y$13$fW5//SvDER8FSqkzcqmooeEwrBTZQpu4Psw9V.gYfE.t9WTeMooBW',	'',	NULL,	NULL,	NULL,	'',	'11',	'1101',	'1101010',	1,	1,	1,	'2018-10-22 20:20:01',	NULL,	NULL,	NULL,	NULL,	'2018-10-22 20:20:00',	NULL,	NULL),
 (7,	'48327290000001',	'Hendri',	'Gunawan',	'admin@gmail.com',	'$2y$13$YdY95fP75F.WlSFG/KMhfekYrkZQE7fL2RQbS0lvmauT03Lcv5T1S',	'08561471500',	'83272934817231',	'hendri-cz0-edcto4dxgixiv9jm.png',	'hendri-fvorsytzeepbkiaxsp40.png',	'Jl Batu Ceper X No 2Y567',	'31',	'3173',	'3173030',	10120,	1,	5,	NULL,	NULL,	NULL,	NULL,	'2018-10-22 02:20:15',	'2018-10-22 04:31:18',	NULL,	NULL),
 (8,	'28327290000001',	'Hendri123',	'Gunawan',	'hendri.gnw123@gmail.com',	'asdmin123',	'08561471500',	'83272934817231',	'hendri123-dq6azcupnqa2ovrakg2.png',	'hendri123-pfim61o9giokeexsotms.png',	'Jl Batu Ceper X No 2Y',	'16',	'1602',	'1602011',	10120,	1,	1,	'2018-10-22 10:56:36',	1,	NULL,	'',	'2018-10-22 10:43:07',	'2018-10-22 10:56:36',	1,	1);
 
@@ -8671,7 +8671,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user` (`id`, `email`, `username`, `password_hash`, `auth_key`, `status`, `last_login`, `join_at`, `blocked_at`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1,	'hendri.gnw@gmail.com',	'hendri.gn',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'e-hE7QPrZsBDkH0EgxA-VYIwGab1cRWt',	1,	'2018-10-22 18:20:48',	'2017-02-16 11:53:05',	NULL,	'2017-02-16 11:53:05',	NULL,	NULL,	NULL),
+(1,	'hendri.gnw@gmail.com',	'hendri.gn',	'$2y$13$P8uRVfpBhxrS3Qi8XQo4nuXm6DiqtVtOiIFMaKyTrX/ba131JESoe',	'e-hE7QPrZsBDkH0EgxA-VYIwGab1cRWt',	1,	'2018-10-23 02:26:03',	'2017-02-16 11:53:05',	NULL,	'2017-02-16 11:53:05',	NULL,	NULL,	NULL),
 (2,	'winatasandi05@gmail.com',	'sandi.winata',	'$2y$13$omEO0lonUBSnTuCG/gvlWuk/UzZbBoiioPvFT/kt7p/mjpHudz8Sa',	'ht_LttpGZ7h0N8Jqm_nLOLrZswjTzEFm',	1,	'2018-10-07 00:15:14',	'2017-02-16 11:53:06',	NULL,	'2017-02-16 11:53:06',	NULL,	NULL,	NULL),
 (3,	'hello@atc.co.id',	'atc.indonesia',	'$2y$13$iZZUL9cy4Yu1hqKKlHUUauE4kvGT0mbNUdhGipOVeEMLGCu/OUw5.',	'moyUNlSERjnesQ-xs_kru_qc7PFX6JLP',	1,	'2018-08-17 04:25:53',	'2017-04-16 22:48:37',	NULL,	'2017-04-16 22:48:37',	'2017-07-30 23:23:20',	2,	2),
 (4,	'muhamadfuady22@gmail.com',	'amin.fuady',	'$2y$13$1hnHd5CXirfuIAfooF7SFemjROo19kWdmteTqFpSMIr7ywMjKWmNW',	'XaJfbXJU8MCRIF_nf_KqO6AUkg60HGaV',	1,	'2018-10-07 00:16:21',	'2018-09-28 03:36:44',	NULL,	'2018-09-28 03:36:43',	'2018-10-07 00:16:04',	2,	2),
@@ -83659,4 +83659,4 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('9107180011',	'9107180',	'KLAIN'),
 ('9107180012',	'9107180',	'SAMUSA');
 
--- 2018-10-22 18:53:52
+-- 2018-10-23 01:25:34

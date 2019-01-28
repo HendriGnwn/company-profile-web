@@ -16,10 +16,10 @@ Hello <?= $model->getFullName() ?>,
 <br/>
 Selamat Anda telah bergabung bersama kami, Berikut adalah identitas Anda.
 <br/>
-<table id="test">
+<table>
     <tr>
-        <td><?= $model->getAttributeLabel('member_code') ?></td>
-        <td>:</td>
+        <td width="45%"><?= $model->getAttributeLabel('member_code') ?></td>
+        <td width="5%">:</td>
         <td><?= $model->member_code ?></td>
     </tr>
     <tr>
@@ -44,11 +44,12 @@ Selamat Anda telah bergabung bersama kami, Berikut adalah identitas Anda.
     </tr>
 </table>
 <br/>
+<br/>
 Silahkan kunjungi Kantor Cabang kami di lokasi tempat tinggal terdekat Anda yaitu:<br/>
-<table id="test">
+<table>
     <tr>
-        <td><?= $model->getAttributeLabel('branch_id') ?></td>
-        <td>:</td>
+        <td width="45%"><?= $model->getAttributeLabel('branch_id') ?></td>
+        <td width="5%">:</td>
         <td><?= $model->branch ? $model->branch->name : $model->branch_id ?></td>
     </tr>
     <tr>
@@ -79,7 +80,7 @@ Silahkan kunjungi Kantor Cabang kami di lokasi tempat tinggal terdekat Anda yait
 </table>
 
 <br/><br/>
-Thanks
+Terimakasih
 
 <br/><br/>
 <?= Config::getAppCompanyName() ?>

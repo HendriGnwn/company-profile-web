@@ -39,7 +39,7 @@ $this->registerMetaSocialMedia($socialMedia);
 
     <?php 
     $projectCompleted = Config::getCounterProjectCompleted(); 
-    $happyCustomer = Config::getCounterHappyCustomer();
+    $counterVisitor = Config::getCounterVisitor();
     $ourEmployee = Config::getCounterOurEmployee();
     $yearOfExperience = Config::getCounterYearOfExperience();
     ?>
@@ -49,7 +49,7 @@ $this->registerMetaSocialMedia($socialMedia);
             <div class="row">
 
                 <div class="col-xs-12 col-md-3 col-sm-3">
-                    <span class="icon-one"><i class="fa fa-check"></i></span>
+                    <span class="icon-four"><i class="fa fa-users"></i></span>
                     <h4><a href="#"><?= $projectCompleted->label ?></a></h4>
                     <div class="count-description">
                         <span class="timer"><?= $projectCompleted->value ?></span>
@@ -61,22 +61,22 @@ $this->registerMetaSocialMedia($socialMedia);
                     <span class="icon-two"><i class="fa fa-calendar"></i></span>
                     <h4><a href="#"><?= $yearOfExperience->label ?></a></h4>
                     <div class="count-description">
-                        <span class="timer"><?= $yearOfExperience->value ?></span>
+                        <span class="timer"><?= app\helpers\FormatConverter::getDaysInDateRange('2018-09-26', date('Y-m-d')) ?></span>
                     </div>
                 </div>
 
 
                 <div class="col-xs-12 col-md-3 col-sm-3">
                     <span class="icon-three"><i class="fa fa-heart"></i></span>
-                    <h4><a href="#"><?= $happyCustomer->label ?></a></h4>
+                    <h4><a href="#"><?= $counterVisitor->label ?></a></h4>
                     <div class="count-description">
-                        <span class="timer"><?= $happyCustomer->value ?></span>
+                        <span class="timer"><?= $counterVisitor->value ?></span>
                     </div>
                 </div>
 
 
                 <div class="col-xs-12 col-md-3 col-sm-3">
-                    <span class="icon-four"><i class="fa fa-users"></i></span>
+                    <span class="icon-one"><i class="fa fa-check"></i></span>
                     <h4><a href="#"><?= $ourEmployee->label ?></a></h4>
                     <div class="count-description">
                         <span class="timer"><?= $ourEmployee->value ?></span>

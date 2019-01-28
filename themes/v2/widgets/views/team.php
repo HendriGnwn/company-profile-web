@@ -18,7 +18,7 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12 col-lg-offset-3">
                 <div class="section_heading text_wrapper">
-                    <h2 style="color:#fff"><?= Yii::t('app', 'Our Team') ?></h2>
+                    <h2 style="color:#fff"><?= Yii::t('app', 'Pendiri Lembaga Persaudaran Anak Nusantara (LAPAN)') ?></h2>
                     <span class="bordered-icon"><i class="fa fa-square"></i></span>
                 </div>
             </div>

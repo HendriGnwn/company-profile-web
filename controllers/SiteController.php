@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\BlogPost;
 use app\models\Client;
+use app\models\Config;
 use app\models\Contact;
 use app\models\ContactForm;
 use app\models\Page;
@@ -47,6 +48,12 @@ class SiteController extends Controller
             ],
         ];
     }
+    
+    protected function visitorCounter()
+    {
+        $counterVisitor = Config::getCounterVisitor();
+        Config::setCounterVisitor($counterVisitor->value+1);
+    }
 
     /**
      * Displays homepage.
@@ -56,6 +63,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = '//home';
+        
+        $this->visitorCounter();
         
         $contactModel = new ContactForm();
         if ($contactModel->load(Yii::$app->request->post()) && $contactModel->contact()) {

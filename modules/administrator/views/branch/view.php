@@ -42,10 +42,10 @@ use yii\widgets\DetailView;
             DetailViewHelper::author($model, 'updated_by'),
         ],
     ]) ?>
-    <h3>District Mapping By Regency <?= $model->regency ? $model->regency->name : $model->regency_id ?></h3>
+    <h3>Mapping Kecamatan berdasarkan <?= $model->regency ? $model->regency->name : $model->regency_id ?></h3>
     <table class="table table-condensed">
         <tr>
-            <th>District</th>
+            <th><?= $model->getAttributeLabel('district_id') ?></th>
         </tr>
         <?php foreach ($model->getDistrictMappings() as $map) { ?>
         <tr>

@@ -71,6 +71,7 @@ use yii\widgets\ActiveForm;
     
     <?php if (!$model->isNewRecord) : ?>
         <?php
+        var_dump($model->district_mapping);
         $provinces = ArrayHelper::map(app\models\Districts::find()->where(['regency_id' => $model->regency_id])->all(), 'id', 'name');
         $provinceOptions = ['data' => $provinces, 'pluginOptions' => ['allowClear' => true, 'multiple' => true], 'options' => ['prompt' => 'Select', 'multiple' => true, 'value' => $model->district_mapping]];
         ?>

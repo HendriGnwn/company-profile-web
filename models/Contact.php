@@ -135,13 +135,14 @@ class Contact extends BaseActiveRecord
      */
     public function sendEmailNewNotification()
     {
-        $mail = MailHelper::sendMail([
-                'to' => Config::getEmailAdmin(),
-                'subject' => 'New Contact | '.$this->subject.' from '. $this->first_name,
-                'view' => ['html' => 'contact/new-contact-to-admin'],
-                'viewParams' => ['model' => $this],
-                'replyTo' => $this->email,
-            ]);
+        $model = $this;
+        $mail = Yii::$app->mailer
+			->compose(['html' => 'contact/new-contact-to-admin'], ['model' => $model])
+			->setFrom([Config::getEmailNoReply() => Yii::$app->name])
+			->setTo(Config::getAppContactEmail())
+			->setReplyTo($this->email)
+			->setSubject('New Contact | '.$this->subject.' from '. $this->first_name)
+            ->send();
         
         return $mail;
     }
