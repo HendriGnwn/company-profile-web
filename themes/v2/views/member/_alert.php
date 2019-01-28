@@ -14,6 +14,12 @@
         <strong><?= Yii::t('app', 'Success Message') ?>: <?= Yii::$app->session->getFlash('success') ?></strong>
     </div>
 <?php } ?>
+<?php if (Yii::$app->session->hasFlash('info')) { ?>
+    <div class="alert fade_info">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong><?= Yii::t('app', 'Info Message') ?>: <?= Yii::$app->session->getFlash('info') ?></strong>
+    </div>
+<?php } ?>
 <?php if (Yii::$app->session->hasFlash('error')) { ?>
     <div class="alert fade_error">
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>

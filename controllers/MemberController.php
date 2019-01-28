@@ -89,6 +89,7 @@ class MemberController extends Controller
     public function actionUpdateProfile()
     {
         $model = $this->findModel();
+        Yii::$app->session->setFlash('info', Yii::t('app', 'untuk perubahan data profile silahkan hubungi dewan pengurus pusat lembaga persaudaraan anak nusantara'));
         if ($model->load(Yii::$app->request->post())) {
             $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
             $model->idCardPhotoFile = UploadedFile::getInstance($model, 'idCardPhotoFile');

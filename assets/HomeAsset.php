@@ -22,7 +22,7 @@ class HomeAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'app\assets\FontAsset',
         'app\assets\FontAwesomeAsset',
-        'app\assets\SliderAsset',
+//        'app\assets\SliderAsset',
     ];
     
     public function init() 

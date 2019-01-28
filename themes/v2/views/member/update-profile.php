@@ -77,38 +77,38 @@ $this->registerCssFile('/themes/v2/css/tab.css');
 
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'first_name')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('first_name')]) ?>
+                                        ->textInput(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('first_name')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'last_name')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('last_name')]) ?>
+                                        ->textInput(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('last_name')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'phone')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('phone')]) ?>
+                                        ->textInput(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('phone')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'id_card_number')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('id_card_number')]) ?>
+                                        ->textInput(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('id_card_number')]) ?>
                                 </div>
-                                <div class="formsix-pos">
+                                <div class="formsix-pos hide">
                                     <label for="Member_id_card_photo"><?= $model->getAttributeLabel('id_card_photo') ?></label>
                                     <?= $form->field($model, 'idCardPhotoFile')
                                         ->fileInput(['maxlength' => true]) ?>
                                 </div>
-                                <div class="formsix-pos">
+                                <div class="formsix-pos hide">
                                     <label for="Member_id_card_photo"><?= $model->getAttributeLabel('photo') ?></label>
                                     <?= $form->field($model, 'photoFile')
                                         ->fileInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('photo')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'address')
-                                        ->textarea(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('address')]) ?>
+                                        ->textarea(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('address')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?php
                                     $provinces = ArrayHelper::map(Provinces::find()->all(), 'id', 'name');
-                                    $provinceOptions = ['data' => $provinces, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => $model->getAttributeLabel('province_id')]];
+                                    $provinceOptions = ['data' => $provinces, 'pluginOptions' => ['allowClear' => true], 'options' => ['prompt' => $model->getAttributeLabel('province_id'), 'readonly' => true]];
                                     ?>
                                     <?= $form->field($model, 'province_id')->widget(Select2::className(), $provinceOptions) ?>
                                 </div>
@@ -116,7 +116,7 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'regency_id')->widget(DepDrop::classname(), [
                                         'type'=>DepDrop::TYPE_SELECT2,
-                                        'options'=>['prompt'=>$model->getAttributeLabel('regency_id')],
+                                        'options'=>['prompt'=>$model->getAttributeLabel('regency_id'), 'readonly' => true],
                                         'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                                         'pluginOptions'=>[
                                             'depends'=>['member-province_id'],
@@ -131,7 +131,7 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'district_id')->widget(DepDrop::classname(), [
                                         'type'=>DepDrop::TYPE_SELECT2,
-                                        'options'=>['prompt'=>$model->getAttributeLabel('district_id')],
+                                        'options'=>['prompt'=>$model->getAttributeLabel('district_id'), 'readonly' => true],
                                         'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                                         'pluginOptions'=>[
                                             'depends'=>['member-regency_id'],
@@ -144,7 +144,7 @@ $this->registerCssFile('/themes/v2/css/tab.css');
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'postal_code')
-                                        ->textInput(['maxlength' => true, 'placeholder'=> $model->getAttributeLabel('postal_code')]) ?>
+                                        ->textInput(['maxlength' => true, 'readonly' => true, 'placeholder'=> $model->getAttributeLabel('postal_code')]) ?>
                                 </div>
                                 <div class="formsix-pos">
                                     <?= $form->field($model, 'email')
